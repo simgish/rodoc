@@ -28,14 +28,14 @@ form button {
   background: white;
 }
 form button {
-  color: #c9c9c9;
-  background: #222222;
+  color: #af2525;
+  background: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 form button:hover {
-  background: #292929;
-  color: white;
+  background: #ffffff;
+  color: #5e1010;
 }
 .todo-container {
   display: flex;

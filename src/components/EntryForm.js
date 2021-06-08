@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+
 const EntryForm = () => {
 
   const addEntry = (event) => {
@@ -8,7 +11,7 @@ const EntryForm = () => {
   return(
     <form onSubmit={addEntry}>
       <input type="text" name="title" />
-      <button type="submit">Add</button>
+      <button type="submit"><FontAwesomeIcon icon={faPlusSquare} /></button>
     </form>
   )
 }
