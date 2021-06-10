@@ -1,5 +1,4 @@
 export const createEntry = (entry) => {
-  console.log(entry);
   return {
     type: 'NEW_ENTRY',
     data: {
@@ -9,4 +8,4 @@ export const createEntry = (entry) => {
       date: new Date()
     }
   }
-}
+} 
