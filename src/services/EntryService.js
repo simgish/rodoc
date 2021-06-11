@@ -8,6 +8,11 @@ const getAll = () => {
   // return request.then(entries => entries.data);
 }
 
-const entryService = { getAll }
+const createEntry = (entry) => {
+  const request = axios.post(baseUrl, entry);
+  return request;
+}
+
+const entryService = { getAll, createEntry }
 
 export default entryService;

@@ -5,7 +5,7 @@ export const createEntry = (entry) => {
       title: entry.title,
       content: entry.content,
       important: true,
-      date: new Date()
+      date: entry.date
     }
   }
 } 

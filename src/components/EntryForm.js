@@ -1,23 +1,32 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch } from 'react-redux'
-import { createEntry } from '../actions/CreateEntry'
+// import { useDispatch } from 'react-redux'
+// import { createEntry } from '../actions/CreateEntry'
+import entryService from '../services/EntryService'
 
-const EntryForm = () => {
+const EntryForm = ({addNewEntry}) => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const addEntry = (event) => {
+  const createEntry = (event) => {
     event.preventDefault();
+    
     const newEntry = {
       title: event.target.title.value,
-      content: 'fake content'
+      content: 'fake content',
+      date: new Date()
     }
-    dispatch(createEntry(newEntry));
+
+    entryService.createEntry(newEntry)
+      .then(response => {
+        console.log('response: ', response.data);
+        addNewEntry(response.data);
+      })
+    // dispatch(createEntry(newEntry));
   }
 
   return(
-    <form onSubmit={addEntry}>
+    <form onSubmit={createEntry}>
       <input type="text" name="title" />
       <button type="submit"><FontAwesomeIcon icon={faPlusSquare} /></button>
     </form>
