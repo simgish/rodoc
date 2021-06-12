@@ -32,10 +32,11 @@ const EntryForm = ({ addNewEntry }) => {
             </select>
           </li>
           <li className="title-input">
-            <input type="text" name="title" />
+            <input type="text" name="title" autocomplete="off" placeholder="Title" />
           </li>
           <li>
-            <textarea className="summary-content" name="summaryContent" rows="10"></textarea>
+            {/* <label>Summary</label> */}
+            <textarea className="summary-content" name="summaryContent" rows="10" placeholder="Summary"></textarea>
           </li>
           <li className="submit-button">
             <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>

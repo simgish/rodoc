@@ -17,9 +17,24 @@ header {
   align-items: center;
 }
 
+input,
+select,
+textarea,
+button {
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 0;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+}
+
 .entry-form {
   display: flex;
   justify-content: center;
+}
+
+.entry-form form {
+  width: 25em;
 }
 
 .entry-form ul {
@@ -27,11 +42,19 @@ header {
   flex-direction: column;
 }
 
+.entry-form ul li {
+  margin: 0.3rem 0;
+}
+
 .entry-form select {
   padding: 0.5rem;
 }
 
 .entry-form input {
+  padding: 0.5rem;
+}
+
+.entry-form button {
   padding: 0.5rem;
 }
 
