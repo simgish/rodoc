@@ -1,16 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
-// import { useDispatch } from 'react-redux'
-// import { createEntry } from '../actions/CreateEntry'
 import entryService from '../services/EntryService'
 
-const EntryForm = ({addNewEntry}) => {
-
-  // const dispatch = useDispatch();
+const EntryForm = ({ addNewEntry }) => {
 
   const createEntry = (event) => {
     event.preventDefault();
-    
+
     const newEntry = {
       title: event.target.title.value,
       content: 'fake content',
@@ -22,14 +18,31 @@ const EntryForm = ({addNewEntry}) => {
         console.log('response: ', response.data);
         addNewEntry(response.data);
       })
-    // dispatch(createEntry(newEntry));
   }
 
-  return(
-    <form onSubmit={createEntry}>
-      <input type="text" name="title" />
-      <button type="submit"><FontAwesomeIcon icon={faPlusSquare} /></button>
-    </form>
+  return (
+    <div className="entry-form">
+      <form onSubmit={createEntry}>
+        <ul className="entry-form">
+          <li className="category-select">
+            <select name="category">
+              <option value="Schedule">Schedule</option>
+              <option value="Schoolwork">Schoolwork</option>
+              <option value="Bedtime">Bedtime</option>
+            </select>
+          </li>
+          <li className="title-input">
+            <input type="text" name="title" />
+          </li>
+          <li>
+            <textarea className="summary-content" name="summaryContent" rows="10"></textarea>
+          </li>
+          <li className="submit-button">
+            <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
+          </li>
+        </ul>
+      </form >
+    </div>
   )
 }
 
