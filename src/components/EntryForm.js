@@ -8,8 +8,9 @@ const EntryForm = ({ addNewEntry }) => {
     event.preventDefault();
 
     const newEntry = {
+      category: event.target.category.value,
       title: event.target.title.value,
-      content: 'fake content',
+      summary: event.target.summary.value,
       date: new Date()
     }
 
@@ -26,17 +27,20 @@ const EntryForm = ({ addNewEntry }) => {
         <ul className="entry-form">
           <li className="category-select">
             <select name="category">
+              <option value="" defaultValue="">Select a Category</option>
               <option value="Schedule">Schedule</option>
               <option value="Schoolwork">Schoolwork</option>
               <option value="Bedtime">Bedtime</option>
             </select>
           </li>
           <li className="title-input">
-            <input type="text" name="title" autocomplete="off" placeholder="Title" />
+            <input type="text" name="title" autoComplete="off" placeholder="Title" />
           </li>
           <li>
-            {/* <label>Summary</label> */}
-            <textarea className="summary-content" name="summaryContent" rows="10" placeholder="Summary"></textarea>
+            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary"></textarea>
+          </li>
+          <li>
+            <input type="file" name="imageUpload" accept="image/*" />
           </li>
           <li className="submit-button">
             <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>

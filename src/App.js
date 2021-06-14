@@ -1,5 +1,6 @@
 import './App.css';
 import EntryForm from './components/EntryForm';
+import EntryList from './components/EntryList';
 import { useState, useEffect } from 'react';
 import entryService from './services/EntryService';
 
@@ -23,10 +24,7 @@ function App() {
         <h1>RoDoc</h1>
       </header>
       <EntryForm addNewEntry={addNewEntry} />
-      {entries.map(entry => {
-        console.log(entry.id);
-        return (<li key={entry.id}>{entry.title}</li>)
-      })}
+      <EntryList entries={entries} />
     </div>
   );
 }

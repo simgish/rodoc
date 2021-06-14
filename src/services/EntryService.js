@@ -12,6 +12,11 @@ const createEntry = (entry) => {
   return request;
 }
 
-const entryService = { getAll, createEntry }
+const updateEntry = (id, updatedEntry) => {
+  const request = axios.put(`${baseUrl}/${id}`, updatedEntry);
+  return request;
+}
+
+const entryService = { getAll, createEntry, updateEntry }
 
 export default entryService;
