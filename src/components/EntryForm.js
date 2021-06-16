@@ -7,10 +7,20 @@ const EntryForm = ({ addNewEntry }) => {
   const createEntry = (event) => {
     event.preventDefault();
 
+    console.log(event.target.imageUpload.files[0]);
+
+    const formData = new FormData();
+    formData.append(
+      "UploadedImage",
+      event.target.imageUpload.files[0],
+      event.target.imageUpload.files[0].name
+    );
+
     const newEntry = {
       category: event.target.category.value,
       title: event.target.title.value,
       summary: event.target.summary.value,
+      imageUpload: formData,
       date: new Date()
     }
 
