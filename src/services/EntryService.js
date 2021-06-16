@@ -8,7 +8,13 @@ const getAll = () => {
 }
 
 const createEntry = (entry) => {
-  const request = axios.post(baseUrl, entry);
+  // const request = axios.post(baseUrl, entry);
+  const request = axios({
+    method: 'post',
+    url: baseUrl,
+    data: entry,
+    headers: {'Content-Type': 'multipart/form-data'}
+  })
   return request;
 }
 

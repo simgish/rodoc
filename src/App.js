@@ -14,7 +14,7 @@ function App() {
   }, [])
 
   const addNewEntry = (entry) => {
-    console.log(entry);
+    // console.log(entry);
     setEntries(entries.concat(entry));
   }
 

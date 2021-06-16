@@ -11,20 +11,26 @@ const EntryForm = ({ addNewEntry }) => {
 
     const formData = new FormData();
     formData.append(
-      "UploadedImage",
+      "uploadedImage",
       event.target.imageUpload.files[0],
       event.target.imageUpload.files[0].name
     );
+    formData.append('category', event.target.category.value);
+    formData.append('title', event.target.title.value);
+    formData.append('summary', event.target.summary.value);
+    formData.append('date', new Date());
 
-    const newEntry = {
-      category: event.target.category.value,
-      title: event.target.title.value,
-      summary: event.target.summary.value,
-      imageUpload: formData,
-      date: new Date()
-    }
-
-    entryService.createEntry(newEntry)
+    // const newEntry = {
+    //   category: event.target.category.value,
+    //   title: event.target.title.value,
+    //   summary: event.target.summary.value,
+    //   imageUpload: formData,
+    //   date: new Date()
+    // }
+    console.log('category: ', formData.get('category'));
+    console.log('uploadedImage: ', formData.get('uploadedImage'));
+    
+    entryService.createEntry(formData)
       .then(response => {
         console.log('response: ', response.data);
         addNewEntry(response.data);
