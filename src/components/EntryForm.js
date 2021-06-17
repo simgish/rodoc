@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import entryService from '../services/EntryService'
+import { useState } from 'react';
 
 const EntryForm = ({ addNewEntry }) => {
 
+  const [theImage, setTheImage] = useState();
+
   const createEntry = (event) => {
     event.preventDefault();
-
-    console.log(event.target.imageUpload.files[0]);
 
     const formData = new FormData();
     formData.append(
@@ -20,16 +21,8 @@ const EntryForm = ({ addNewEntry }) => {
     formData.append('summary', event.target.summary.value);
     formData.append('date', new Date());
 
-    // const newEntry = {
-    //   category: event.target.category.value,
-    //   title: event.target.title.value,
-    //   summary: event.target.summary.value,
-    //   imageUpload: formData,
-    //   date: new Date()
-    // }
-    console.log('category: ', formData.get('category'));
-    console.log('uploadedImage: ', formData.get('uploadedImage'));
-    
+    setTheImage(URL.createObjectURL(formData.get('uploadedImage')));
+
     entryService.createEntry(formData)
       .then(response => {
         console.log('response: ', response.data);
@@ -63,6 +56,9 @@ const EntryForm = ({ addNewEntry }) => {
           </li>
         </ul>
       </form >
+      <div>the image:
+        <img alt="" src={theImage} />
+      </div>
     </div>
   )
 }
