@@ -9,7 +9,8 @@ function App() {
 
   useEffect(() => {
     entryService.getAll().then(entries => {
-      setEntries(entries.data);
+      console.log(entries.data);
+      setEntries(entries.data.data);
     })
   }, [])
 
