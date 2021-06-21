@@ -55,10 +55,12 @@ const EntryForm = ({ addNewEntry }) => {
             <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
           </li>
         </ul>
+        <ul>
+          <li>
+            <img alt="" src={theImage} />
+          </li>
+        </ul>
       </form >
-      <div>the image:
-        <img alt="" src={theImage} />
-      </div>
     </div>
   )
 }
