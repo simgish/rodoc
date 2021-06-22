@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const EntryForm = ({ addNewEntry }) => {
 
-  const [theImage, setTheImage] = useState();
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const createEntry = (event) => {
     event.preventDefault();
@@ -21,7 +21,7 @@ const EntryForm = ({ addNewEntry }) => {
     formData.append('summary', event.target.summary.value);
     formData.append('date', new Date());
 
-    setTheImage(URL.createObjectURL(formData.get('uploadedImage')));
+    // setTheImage(URL.createObjectURL(formData.get('uploadedImage')));
 
     entryService.createEntry(formData)
       .then(response => {
@@ -32,7 +32,9 @@ const EntryForm = ({ addNewEntry }) => {
 
   const imageWasSelected = (event) => {
     console.log(event.target.files[0]);
-    setTheImage(URL.createObjectURL(event.target.files[0]));
+    const selectedImage = event.target.files[0];
+    // setTheImage(URL.createObjectURL(event.target.files[0]));
+    setSelectedImages(selectedImages.concat(URL.createObjectURL(selectedImage)));
   }
 
   return (
@@ -54,16 +56,16 @@ const EntryForm = ({ addNewEntry }) => {
             <textarea className="summary-content" name="summary" rows="10" placeholder="Summary"></textarea>
           </li>
           <li>
-            <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected}/>
+            <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <li className="submit-button">
             <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
           </li>
         </ul>
         <ul>
-          <li>
-            <img alt="" className="image-selected-preview" src={theImage} />
-          </li>
+          {selectedImages.map(function (imageUrl, index) {
+            return <img key={index} alt="" className="image-selected-preview" src={imageUrl} />;
+          })}
         </ul>
       </form >
     </div>
