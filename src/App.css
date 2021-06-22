@@ -91,3 +91,6 @@ button {
   font-weight: bold;
 }
 
+.image-selected-preview {
+  max-width: 10em;
+}

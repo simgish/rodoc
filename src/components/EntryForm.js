@@ -30,6 +30,11 @@ const EntryForm = ({ addNewEntry }) => {
       })
   }
 
+  const imageWasSelected = (event) => {
+    console.log(event.target.files[0]);
+    setTheImage(URL.createObjectURL(event.target.files[0]));
+  }
+
   return (
     <div className="entry-form">
       <form onSubmit={createEntry}>
@@ -49,7 +54,7 @@ const EntryForm = ({ addNewEntry }) => {
             <textarea className="summary-content" name="summary" rows="10" placeholder="Summary"></textarea>
           </li>
           <li>
-            <input type="file" name="imageUpload" accept="image/*" />
+            <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected}/>
           </li>
           <li className="submit-button">
             <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
@@ -57,7 +62,7 @@ const EntryForm = ({ addNewEntry }) => {
         </ul>
         <ul>
           <li>
-            <img alt="" src={theImage} />
+            <img alt="" className="image-selected-preview" src={theImage} />
           </li>
         </ul>
       </form >
