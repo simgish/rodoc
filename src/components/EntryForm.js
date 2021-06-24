@@ -33,12 +33,12 @@ const EntryForm = ({ addNewEntry }) => {
   const imageWasSelected = (event) => {
     console.log(event.target.files[0]);
     const selectedImage = event.target.files[0];
-    // setTheImage(URL.createObjectURL(event.target.files[0]));
-    setSelectedImages(selectedImages.concat(URL.createObjectURL(selectedImage)));
+    setSelectedImages(selectedImages.concat(selectedImage));
   }
 
-  const removeImage = (id) => {
-    console.log('remove image with id: ', id);
+  const removeImage = (lastModified) => {
+    const newSelectedImages = selectedImages.filter((img) => img.lastModified !== lastModified);
+    setSelectedImages(newSelectedImages);
   }
 
   return (
@@ -67,8 +67,8 @@ const EntryForm = ({ addNewEntry }) => {
           </li>
         </ul>
         <ul>
-          {selectedImages.map(function (imageUrl, index) {
-            return <img key={index} alt="" className="image-selected-preview" src={imageUrl} onClick={() => removeImage(index)} />;
+          {selectedImages.map(function (image, index) {
+            return <img key={index} alt="" className="image-selected-preview" src={URL.createObjectURL(image)} onClick={() => removeImage(image.lastModified)} />;
           })}
         </ul>
       </form >
