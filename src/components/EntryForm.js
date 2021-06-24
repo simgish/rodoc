@@ -37,6 +37,10 @@ const EntryForm = ({ addNewEntry }) => {
     setSelectedImages(selectedImages.concat(URL.createObjectURL(selectedImage)));
   }
 
+  const removeImage = (id) => {
+    console.log('remove image with id: ', id);
+  }
+
   return (
     <div className="entry-form">
       <form onSubmit={createEntry}>
@@ -64,7 +68,7 @@ const EntryForm = ({ addNewEntry }) => {
         </ul>
         <ul>
           {selectedImages.map(function (imageUrl, index) {
-            return <img key={index} alt="" className="image-selected-preview" src={imageUrl} />;
+            return <img key={index} alt="" className="image-selected-preview" src={imageUrl} onClick={() => removeImage(index)} />;
           })}
         </ul>
       </form >
