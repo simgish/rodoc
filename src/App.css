@@ -91,6 +91,20 @@ button {
   font-weight: bold;
 }
 
+.image-wrapper {
+  /* border: 2px dashed white; */
+  display: flex;
+  /* max-width: 10em; */
+  max-height: 10em;
+  padding: 2px;
+  overflow: hidden;
+  float: left;
+}
+
+.image-close-button {
+  cursor: pointer;
+}
+
 .image-selected-preview {
   max-width: 10em;
   max-height: 10em;

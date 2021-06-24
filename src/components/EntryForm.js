@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
 import entryService from '../services/EntryService'
 import { useState } from 'react';
 
@@ -68,7 +68,12 @@ const EntryForm = ({ addNewEntry }) => {
         </ul>
         <ul>
           {selectedImages.map(function (image, index) {
-            return <img key={index} alt="" className="image-selected-preview" src={URL.createObjectURL(image)} onClick={() => removeImage(image.lastModified)} />;
+            return (
+              <li key={index} className="image-wrapper">
+                <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
+                <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
+              </li>
+            )
           })}
         </ul>
       </form >
