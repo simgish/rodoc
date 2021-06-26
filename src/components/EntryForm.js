@@ -11,11 +11,19 @@ const EntryForm = ({ addNewEntry }) => {
     event.preventDefault();
 
     const formData = new FormData();
+
+    console.log('selectedImages: ', selectedImages);
+
     formData.append(
       "uploadedImage",
       event.target.imageUpload.files[0],
       event.target.imageUpload.files[0].name
     );
+
+    // for (var x = 0; x < ins; x++) {
+    //   fd.append("fileToUpload[]", document.getElementById('fileToUpload').files[x]);
+    // }
+
     formData.append('category', event.target.category.value);
     formData.append('title', event.target.title.value);
     formData.append('summary', event.target.summary.value);
