@@ -3,7 +3,7 @@ import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
 import entryService from '../services/EntryService'
 import { useState } from 'react';
 
-const EntryForm = ({ addNewEntry }) => {
+const EntryForm = ({ addNewEntry, categories }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -56,9 +56,9 @@ const EntryForm = ({ addNewEntry }) => {
           <li className="category-select">
             <select name="category">
               <option value="" defaultValue="">Select a Category</option>
-              <option value="Schedule">Schedule</option>
-              <option value="Schoolwork">Schoolwork</option>
-              <option value="Bedtime">Bedtime</option>
+              {categories.map(function (category) {
+                return <option value={category}>{category}</option>
+              })}
             </select>
           </li>
           <li className="title-input">

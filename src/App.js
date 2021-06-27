@@ -6,12 +6,14 @@ import entryService from './services/EntryService';
 
 function App() {
   const [entries, setEntries] = useState([]);
+  const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
 
   useEffect(() => {
     entryService.getAll().then(entries => {
       console.log(entries.data);
       setEntries(entries.data.data);
-    })
+    });
+
   }, [])
 
   const addNewEntry = (entry) => {
@@ -24,7 +26,7 @@ function App() {
       <header>
         <h1>RoDoc</h1>
       </header>
-      <EntryForm addNewEntry={addNewEntry} />
+      <EntryForm addNewEntry={addNewEntry} categories={categories}/>
       <EntryList entries={entries} />
     </div>
   );
