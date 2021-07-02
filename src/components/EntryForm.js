@@ -56,6 +56,7 @@ const EntryForm = ({ addNewEntry, categories }) => {
           <li className="category-select">
             <select name="category">
               <option value="" defaultValue="">Select a Category</option>
+              <option value="" defaultValue="">Add New Category...</option>
               {categories.map(function (category) {
                 return <option value={category}>{category}</option>
               })}
