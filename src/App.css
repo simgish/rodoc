@@ -103,6 +103,7 @@ button {
 
 .image-close-button {
   cursor: pointer;
+  position: absolute;
 }
 
 .image-selected-preview {
