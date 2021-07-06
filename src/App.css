@@ -96,14 +96,19 @@ button {
   display: flex;
   /* max-width: 10em; */
   max-height: 10em;
-  padding: 2px;
   overflow: hidden;
   float: left;
+  position: relative;
 }
 
 .image-close-button {
   cursor: pointer;
   position: absolute;
+  background-color: black;
+  padding: 1px 5px 1px 5px;
+  border-radius: 5px 0px 5px 5px;
+  position: absolute;
+  right: 0px;
 }
 
 .image-selected-preview {
