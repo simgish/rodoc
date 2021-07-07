@@ -21,12 +21,17 @@ function App() {
     setEntries(entries.concat(entry));
   }
 
+  const addCategory = (category) => {
+    console.log('category: ', category)
+    setCategories(categories.concat(category));
+  }
+
   return (
     <div className="App">
       <header>
         <h1>RoDoc</h1>
       </header>
-      <EntryForm addNewEntry={addNewEntry} categories={categories}/>
+      <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories}/>
       <EntryList entries={entries} />
     </div>
   );

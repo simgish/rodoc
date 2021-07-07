@@ -2,10 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
 import entryService from '../services/EntryService'
 import { useState } from 'react';
+import AddCategoryModal from './AddCategoryModal';
 
-const EntryForm = ({ addNewEntry, categories }) => {
+const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
+  const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
 
   const createEntry = (event) => {
     event.preventDefault();
@@ -49,14 +51,26 @@ const EntryForm = ({ addNewEntry, categories }) => {
     setSelectedImages(newSelectedImages);
   }
 
+  const categorySelected = (e) => {
+    if (e.target.value === 'addNewCategory') {
+      setShowAddCategoryModal(true);
+    }
+  }
+
+  const renderAddCategoryModal = () => {
+    if (showAddCategoryModal) {
+      return <AddCategoryModal addNewCategory={addNewCategory} />
+    }
+  }
+
   return (
     <div className="entry-form">
       <form onSubmit={createEntry}>
         <ul className="entry-form">
           <li className="category-select">
-            <select name="category">
-              <option value="" defaultValue="">Select a Category</option>
-              <option value="" defaultValue="">Add New Category...</option>
+            <select name="category" onChange={categorySelected}>
+              <option value="">Select a Category</option>
+              <option value="addNewCategory">Add New Category...</option>
               {categories.map(function (category) {
                 return <option value={category}>{category}</option>
               })}
@@ -86,6 +100,9 @@ const EntryForm = ({ addNewEntry, categories }) => {
           })}
         </ul>
       </form >
+      
+      { renderAddCategoryModal() }
+      
     </div>
   )
 }
