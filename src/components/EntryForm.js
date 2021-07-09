@@ -14,24 +14,14 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
     const formData = new FormData();
 
-    console.log('selectedImages: ', selectedImages);
-
-    formData.append(
-      "uploadedImage",
-      event.target.imageUpload.files[0],
-      event.target.imageUpload.files[0].name
-    );
-
-    // for (var x = 0; x < ins; x++) {
-    //   fd.append("fileToUpload[]", document.getElementById('fileToUpload').files[x]);
-    // }
+    for (let i = 0; i < selectedImages.length; i++) {
+      formData.append(`selectedImages[${i}]`, selectedImages[i]);
+    }
 
     formData.append('category', event.target.category.value);
     formData.append('title', event.target.title.value);
     formData.append('summary', event.target.summary.value);
     formData.append('date', new Date());
-
-    // setTheImage(URL.createObjectURL(formData.get('uploadedImage')));
 
     entryService.createEntry(formData)
       .then(response => {
@@ -86,7 +76,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <li className="submit-button">
-            <button type="submit" class="add-entry-button">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
+            <button type="submit" className="add-entry-button">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
           </li>
         </ul>
         <ul>

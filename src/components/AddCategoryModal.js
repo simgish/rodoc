@@ -18,8 +18,8 @@ const AddCategoryModal = ({ addNewCategory }) => {
                 <input type="text" name="categoryName" placeholder="New Category" />
                 </li>
                 <li className="submit-button">
-                    <button type="submit" class="add-category-button">Add Category <FontAwesomeIcon icon={faPlusSquare} /></button>
-                    <button type="button" class="close-modal-button">Close <FontAwesomeIcon icon={faTimes} /></button>
+                    <button type="submit" className="add-category-button">Add Category <FontAwesomeIcon icon={faPlusSquare} /></button>
+                    <button type="button" className="close-modal-button">Close <FontAwesomeIcon icon={faTimes} /></button>
                 </li>
                 </ul>
             </form>
