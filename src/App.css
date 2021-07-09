@@ -127,6 +127,17 @@ button {
   padding: 15px;
 }
 
+.add-category-modal .close-button {
+  cursor: pointer;
+  position: absolute;
+  background-color: black;
+  padding: 1px 5px 1px 5px;
+  border-radius: 5px 0px 5px 5px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
 form button {
   padding: 0.5rem;
   cursor: pointer;

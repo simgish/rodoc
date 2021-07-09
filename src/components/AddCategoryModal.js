@@ -10,6 +10,7 @@ const AddCategoryModal = ({ addNewCategory }) => {
 
     return (
         <div className="add-category-modal">
+            <span className="close-button"><FontAwesomeIcon icon={faTimes} /></span>
             <h2>Add Category Modal</h2>
             <form onSubmit={onSubitNewCategory}>
                 <ul className="entry-form">
