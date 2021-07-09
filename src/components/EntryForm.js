@@ -86,7 +86,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <li className="submit-button">
-            <button type="submit">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
+            <button type="submit" class="add-entry-button">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
           </li>
         </ul>
         <ul>

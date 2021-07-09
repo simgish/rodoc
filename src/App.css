@@ -82,7 +82,7 @@ button {
   justify-content: center;
 }
 
-.submit-button button {
+.submit-button .add-entry-button {
   padding: 0.5rem;
   cursor: pointer;
   background-color: #54bb54;
@@ -127,6 +127,15 @@ button {
   padding: 15px;
 }
 
+.add-category-modal .add-category-button {
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #54bb54;
+  color: #ffffff;
+  width: 10em;
+  font-weight: bold;
+}
+
 .add-category-modal .close-button {
   cursor: pointer;
   position: absolute;
@@ -136,6 +145,10 @@ button {
   position: absolute;
   top: 0px;
   right: 0px;
+}
+
+.close-modal-button {
+  background-color: black;
 }
 
 form button {
