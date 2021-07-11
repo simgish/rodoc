@@ -33,14 +33,25 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
-    const date = new Date();
 
-    await db.collection("entries").add({
+    for (let i = 0; i < selectedImages.length; i++) {
+      console.log(selectedImages[i]);
+      // formData.append(`selectedImages[${i}]`, selectedImages[i]);
+    }
+
+    const date = new Date();
+    const entry = {
+      category: event.target.category.value,
       title: event.target.title.value,
       summary: event.target.summary.value,
       createdAt: date.toUTCString(),
       updatedAt: date.toUTCString(),
-    });
+      // images: selectedImages,
+    }
+
+    await db.collection("entries").add(entry);
+
+    console.log('saved entry: ', entry);
   };
 
   const imageWasSelected = (event) => {
