@@ -10,11 +10,6 @@ function App() {
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
 
   useEffect(() => {
-    // entryService.getAll().then(entries => {
-    //   console.log(entries.data);
-    //   setEntries(entries.data.data);
-    // });
-
     db.collection("entries")
       .orderBy("createdAt", "desc")
       .get()
@@ -24,20 +19,17 @@ function App() {
           ...doc.data(),
         }));
 
-        console.log('entries: ', data);
-
+        // console.log('entries: ', data);
         setEntries(data);
       });
 
   }, [])
 
   const addNewEntry = (entry) => {
-    // console.log(entry);
     setEntries(entries.concat(entry));
   }
 
   const addCategory = (category) => {
-    console.log('category: ', category)
     setCategories(categories.concat(category));
   }
 

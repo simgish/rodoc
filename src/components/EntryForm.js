@@ -10,34 +10,12 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
 
-  // const createEntry = (event) => {
-  //   event.preventDefault();
-
-  //   const formData = new FormData();
-
-  //   for (let i = 0; i < selectedImages.length; i++) {
-  //     formData.append(`selectedImages[${i}]`, selectedImages[i]);
-  //   }
-
-  //   formData.append('category', event.target.category.value);
-  //   formData.append('title', event.target.title.value);
-  //   formData.append('summary', event.target.summary.value);
-  //   formData.append('date', new Date());
-
-  //   entryService.createEntry(formData)
-  //     .then(response => {
-  //       console.log('response: ', response.data);
-  //       addNewEntry(response.data);
-  //     })
-  // }
-
   const createEntry = async (event) => {
     event.preventDefault();
     let imageNames = [];
     let imageSrcs = [];
 
     for (let i = 0; i < selectedImages.length; i++) {
-      console.log(selectedImages[i]);
       imageNames.push(selectedImages[i].name);
       imageSrcs.push(URL.createObjectURL(selectedImages[i]));
     }
@@ -53,13 +31,14 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       imageSrcs: imageSrcs,
     }
 
-    await db.collection("entries").add(entry);
+    await db.collection("entries").add(entry).then(firestoreResult => {
+      entry.id = firestoreResult.id;
+      addNewEntry(entry);
+    });
 
-    console.log('saved entry: ', entry);
   };
 
   const imageWasSelected = (event) => {
-    console.log(event.target.files[0]);
     const selectedImage = event.target.files[0];
     setSelectedImages(selectedImages.concat(selectedImage));
   }
