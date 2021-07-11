@@ -34,11 +34,12 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   const createEntry = async (event) => {
     event.preventDefault();
     let imageNames = [];
+    let imageSrcs = [];
 
     for (let i = 0; i < selectedImages.length; i++) {
       console.log(selectedImages[i]);
       imageNames.push(selectedImages[i].name);
-      // formData.append(`selectedImages[${i}]`, selectedImages[i]);
+      imageSrcs.push(URL.createObjectURL(selectedImages[i]));
     }
 
     const date = new Date();
@@ -49,6 +50,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       createdAt: date.toUTCString(),
       updatedAt: date.toUTCString(),
       images: imageNames,
+      imageSrcs: imageSrcs,
     }
 
     await db.collection("entries").add(entry);
