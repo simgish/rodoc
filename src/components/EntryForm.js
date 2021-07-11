@@ -3,32 +3,45 @@ import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
 import entryService from '../services/EntryService'
 import { useState } from 'react';
 import AddCategoryModal from './AddCategoryModal';
+import db from '../firebase.config';
 
 const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
 
-  const createEntry = (event) => {
+  // const createEntry = (event) => {
+  //   event.preventDefault();
+
+  //   const formData = new FormData();
+
+  //   for (let i = 0; i < selectedImages.length; i++) {
+  //     formData.append(`selectedImages[${i}]`, selectedImages[i]);
+  //   }
+
+  //   formData.append('category', event.target.category.value);
+  //   formData.append('title', event.target.title.value);
+  //   formData.append('summary', event.target.summary.value);
+  //   formData.append('date', new Date());
+
+  //   entryService.createEntry(formData)
+  //     .then(response => {
+  //       console.log('response: ', response.data);
+  //       addNewEntry(response.data);
+  //     })
+  // }
+
+  const createEntry = async (event) => {
     event.preventDefault();
+    const date = new Date();
 
-    const formData = new FormData();
-
-    for (let i = 0; i < selectedImages.length; i++) {
-      formData.append(`selectedImages[${i}]`, selectedImages[i]);
-    }
-
-    formData.append('category', event.target.category.value);
-    formData.append('title', event.target.title.value);
-    formData.append('summary', event.target.summary.value);
-    formData.append('date', new Date());
-
-    entryService.createEntry(formData)
-      .then(response => {
-        console.log('response: ', response.data);
-        addNewEntry(response.data);
-      })
-  }
+    await db.collection("entries").add({
+      title: event.target.title.value,
+      summary: event.target.summary.value,
+      createdAt: date.toUTCString(),
+      updatedAt: date.toUTCString(),
+    });
+  };
 
   const imageWasSelected = (event) => {
     console.log(event.target.files[0]);
