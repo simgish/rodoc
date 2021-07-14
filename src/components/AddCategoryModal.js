@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const AddCategoryModal = ({ addNewCategory }) => {
+const AddCategoryModal = ({ addNewCategory, closeModal }) => {
 
     const onSubitNewCategory = (event) => {
         event.preventDefault();
@@ -10,7 +10,7 @@ const AddCategoryModal = ({ addNewCategory }) => {
 
     return (
         <div className="add-category-modal">
-            <span className="close-button"><FontAwesomeIcon icon={faTimes} /></span>
+            <span className="close-button" onClick={closeModal}><FontAwesomeIcon icon={faTimes} /></span>
             <h2>Add Category Modal</h2>
             <form onSubmit={onSubitNewCategory}>
                 <ul className="entry-form">
@@ -19,7 +19,7 @@ const AddCategoryModal = ({ addNewCategory }) => {
                 </li>
                 <li className="submit-button">
                     <button type="submit" className="add-category-button">Add Category <FontAwesomeIcon icon={faPlusSquare} /></button>
-                    <button type="button" className="close-modal-button">Close <FontAwesomeIcon icon={faTimes} /></button>
+                    <button type="button" className="close-modal-button" onClick={closeModal}>Close <FontAwesomeIcon icon={faTimes} /></button>
                 </li>
                 </ul>
             </form>

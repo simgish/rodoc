@@ -54,9 +54,13 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     }
   }
 
+  const closeAddCategoryModal = () => {
+    setShowAddCategoryModal(false);
+  }
+
   const renderAddCategoryModal = () => {
     if (showAddCategoryModal) {
-      return <AddCategoryModal addNewCategory={addNewCategory} />
+      return <AddCategoryModal addNewCategory={addNewCategory} closeModal={closeAddCategoryModal} />
     }
   }
 
