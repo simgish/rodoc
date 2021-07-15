@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+.App {
+  margin-left: 1em;
+  margin-right: 1em;
+}
 body {
   background-image: linear-gradient(120deg, #6628ca 0%, #6d0e4a 100%);
   color: white;
