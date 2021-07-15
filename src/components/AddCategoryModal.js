@@ -6,6 +6,7 @@ const AddCategoryModal = ({ addNewCategory, closeModal }) => {
     const onSubitNewCategory = (event) => {
         event.preventDefault();
         addNewCategory(event.target.categoryName.value);
+        event.target.categoryName.value = '';
     }
 
     return (

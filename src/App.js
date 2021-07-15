@@ -2,7 +2,6 @@ import './App.css';
 import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import { useState, useEffect } from 'react';
-import entryService from './services/EntryService';
 import db from './firebase.config';
 
 function App() {

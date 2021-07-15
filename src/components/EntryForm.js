@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
-import entryService from '../services/EntryService'
 import { useState } from 'react';
 import AddCategoryModal from './AddCategoryModal';
 import db from '../firebase.config';
+import { storage } from '../firebase.config';
 
 const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
