@@ -9,50 +9,75 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
+  const promises = [];
+  let imageFirebaseUrls = [];
+
+  const handleFirebaseUploads = async (event) => {
+
+    for (let i = 0; i < selectedImages.length; i++) {
+      const uploadTask = storage.ref(`/images/${selectedImages[i].name}`).put(selectedImages[i]).then(snapshot => {
+        return snapshot.ref.getDownloadURL();   // Will return a promise with the download link
+      }).then(downloadURL => {
+        console.log(`Successfully uploaded file and got download link - ${downloadURL}`);
+        imageFirebaseUrls.push(downloadURL);
+        return downloadURL;
+     })
+  
+     .catch(error => {
+        // Use to signal error if something goes wrong.
+        console.log(`Failed to upload file and get link - ${error}`);
+     });
+      promises.push(uploadTask);
+
+      // uploadTask.on('state_changed',
+      //   (snapShot) => {
+      //     // console.log(snapShot)
+      //   }, (err) => {
+      //     console.log(err)
+      //   }, () => {
+      //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+      //       console.log('File available at', downloadURL);
+      //       return downloadURL;
+      //     });
+      //     // storage.ref('images').child(selectedImages[i].name).getDownloadURL()
+      //     //   .then(fireBaseUrl => {
+      //     //     console.log(fireBaseUrl);
+      //     //     imageFirebaseUrls.push(fireBaseUrl);
+      //     //     return fireBaseUrl;
+      //     //   })
+      //   })
+    }
+  }
 
   const createEntry = async (event) => {
     event.preventDefault();
-    let imageNames = [];
-    let imageSrcs = [];
+    await handleFirebaseUploads();
+    Promise.all(promises).then(tasks => {
+      Promise.all(tasks).then((downloadUrl) => {
+        imageFirebaseUrls.push(downloadUrl);
+      });
 
-    for (let i = 0; i < selectedImages.length; i++) {
-      imageNames.push(selectedImages[i].name);
-      imageSrcs.push(URL.createObjectURL(selectedImages[i]));
-      console.log('filename: ', selectedImages[i].name);
-      const uploadTask = storage.ref(`/images/${selectedImages[i].name}`).put(selectedImages[i]);
-      uploadTask.on('state_changed',
-        (snapShot) => {
-          //takes a snap shot of the process as it is happening
-          console.log(snapShot)
-        }, (err) => {
-          //catches the errors
-          console.log(err)
-        }, () => {
-          // gets the functions from storage refences the image storage in firebase by the children
-          // gets the download url then sets the image from firebase as the value for the imgUrl key:
-          storage.ref('images').child(selectedImages[i].name).getDownloadURL()
-            .then(fireBaseUrl => {
-              // setImageAsUrl(prevObject => ({ ...prevObject, imgUrl: fireBaseUrl }))
-              console.log(fireBaseUrl);
-            })
-        })
-    }
-    return;
+      console.log('images: ', imageFirebaseUrls);
+      const date = new Date();
+      const entry = {
+        category: event.target.category.value,
+        title: event.target.title.value,
+        summary: event.target.summary.value,
+        createdAt: date.toUTCString(),
+        updatedAt: date.toUTCString(),
+        images: imageFirebaseUrls,
+        imagesLength: imageFirebaseUrls.length
+      }
 
-    const date = new Date();
-    const entry = {
-      category: event.target.category.value,
-      title: event.target.title.value,
-      summary: event.target.summary.value,
-      createdAt: date.toUTCString(),
-      updatedAt: date.toUTCString(),
-      images: imageNames,
-      imageSrcs: imageSrcs,
-    }
+      console.log(entry);
+      return entry;
 
-    await db.collection("entries").add(entry).then(firestoreResult => {
-      entry.id = firestoreResult.id;
-      addNewEntry(entry);
+      // return;
+    }).then((entry) => {
+      db.collection("entries").add(entry).then(firestoreResult => {
+        entry.id = firestoreResult.id;
+        addNewEntry(entry);
+      });
     });
 
   };
