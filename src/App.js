@@ -3,6 +3,7 @@ import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import { useState, useEffect } from 'react';
 import db from './firebase.config';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -37,8 +38,38 @@ function App() {
       <header>
         <h1>RoDoc</h1>
       </header>
-      <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories}/>
-      <EntryList entries={entries} />
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/entries">Entries</Link>
+            </li>
+            <li>
+              <Link to="/entry">Add Entry</Link>
+            </li>
+          </ul>
+
+          {/* <hr /> */}
+
+          <Switch>
+            <Route exact path="/">
+              {/* <Home /> */}
+              <EntryList entries={entries} />
+            </Route>
+            <Route path="/entry">
+              <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories} />
+            </Route>
+            <Route path="/entries">
+              <EntryList entries={entries} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+      {/* <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories}/>
+      <EntryList entries={entries} /> */}
     </div>
   );
 }
