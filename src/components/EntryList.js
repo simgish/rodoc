@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const EntryList = ({ entries }) => {
 
   const updateEntry = (id) => {
@@ -10,9 +12,11 @@ const EntryList = ({ entries }) => {
       <ul>
         {entries.map(entry => {
           return (
-            <li key={entry.id} onClick={() => updateEntry(entry.id)}>
-              {entry.title} - {entry.images.length} photos
-            </li>
+            <Link to={`/edit-entry/${entry.id}`}>
+              <li key={entry.id} onClick={() => updateEntry(entry.id)}>
+                {entry.title} - {entry.images.length} photos
+              </li>
+            </Link>
           )
         })}
       </ul>

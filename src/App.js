@@ -1,6 +1,7 @@
 import './App.css';
 import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
+import EntryEditForm from './components/EntryEditForm';
 import { useState, useEffect } from 'react';
 import db from './firebase.config';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -64,6 +65,9 @@ function App() {
             </Route>
             <Route path="/entries">
               <EntryList entries={entries} />
+            </Route>
+            <Route path="/edit-entry/:entryId">
+              <EntryEditForm editEntry={addNewEntry} categories={categories} entries={entries} />
             </Route>
           </Switch>
         </div>

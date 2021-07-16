@@ -4,9 +4,10 @@ import { useState } from 'react';
 import AddCategoryModal from './AddCategoryModal';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
+import { useParams } from "react-router-dom";
 
-const EntryForm = ({ editNewEntry, addNewCategory, categories }) => {
-
+const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
+  const { entryId } = useParams();
   const [selectedImages, setSelectedImages] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   let promises = [];
@@ -51,7 +52,7 @@ const EntryForm = ({ editNewEntry, addNewCategory, categories }) => {
     }).then((entry) => {
       db.collection("entries").add(entry).then(firestoreResult => {
         entry.id = firestoreResult.id;
-        addNewEntry(entry);
+        editEntry(entry);
         resetForm(event);
       })
         .catch(error => {
@@ -138,4 +139,4 @@ const EntryForm = ({ editNewEntry, addNewCategory, categories }) => {
   )
 }
 
-export default EntryForm;
+export default EntryEditForm;
