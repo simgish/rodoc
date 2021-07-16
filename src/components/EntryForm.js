@@ -33,11 +33,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   const createEntry = async (event) => {
     event.preventDefault();
     await handleFirebaseUploads();
-    Promise.all(promises).then(tasks => {
-      Promise.all(tasks).then((downloadUrl) => {
-        // imageFirebaseUrls.push(downloadUrl);
-      });
-
+    Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const date = new Date();
       const entry = {
