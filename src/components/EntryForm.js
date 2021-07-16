@@ -23,11 +23,10 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
         return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
         imageFirebaseUrls.push(downloadURL);
-     })
-  
-     .catch(error => {
-        console.log(`Failed to upload file and get link - ${error}`);
-     });
+      })
+        .catch(error => {
+          console.log(`Failed to upload file and get link - ${error}`);
+        });
       promises.push(uploadTask);
     }
   }
@@ -48,14 +47,12 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
         summary: event.target.summary.value,
         createdAt: date.toUTCString(),
         updatedAt: date.toUTCString(),
-        images: imageFirebaseUrls,
-        imagesLength: imageFirebaseUrls.length
+        images: imageFirebaseUrls
       }
 
       console.log(entry);
       return entry;
-
-      // return;
+      
     }).then((entry) => {
       db.collection("entries").add(entry).then(firestoreResult => {
         entry.id = firestoreResult.id;
