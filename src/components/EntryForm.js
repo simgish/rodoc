@@ -37,6 +37,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       console.log('images: ', imageFirebaseUrls);
       const date = new Date();
       const entry = {
+        isHidden: false,
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,

@@ -99,6 +99,27 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     event.target.reset();
   }
 
+  const renderExistingImages = () => {
+    if (!Array.isArray(entryToEdit?.images)) {
+      console.log(entryToEdit);
+      return;
+    } else {
+      console.log(entryToEdit.images);
+    }
+    return (
+      <ul>
+        {entryToEdit.images.map(function (image, index) {
+          return (
+            <li key={index} className="image-wrapper">
+              <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
+              <img alt="" className="image-selected-preview" src={image} />
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+
   return (
     <div className="entry-form">
       <form onSubmit={createEntry}>
@@ -121,17 +142,18 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
           <li>
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
-          <li>
-            <ul>
-              {/* {entryToEdit.images.map(function (image, index) {
+          <ul>
+              {selectedImages.map(function (image, index) {
                 return (
                   <li key={index} className="image-wrapper">
                     <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
                     <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
                   </li>
                 )
-              })} */}
+              })}
             </ul>
+          <li>
+            {renderExistingImages()}
           </li>
           <li className="submit-button">
             <button type="submit" className="add-entry-button">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>

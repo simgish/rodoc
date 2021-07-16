@@ -4,7 +4,7 @@ const EntryList = ({ entries }) => {
 
   const updateEntry = (id) => {
     return;
-    let entryToEdit = entries.find((e) => e.id === id);
+    // let entryToEdit = entries.find((e) => e.id === id);
   }
 
   return (
