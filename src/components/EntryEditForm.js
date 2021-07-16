@@ -1,17 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddCategoryModal from './AddCategoryModal';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
 
-const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
+const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
+  const [entryToEdit, setEntryToEdit] = useState({});
   const { entryId } = useParams();
   const [selectedImages, setSelectedImages] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   let promises = [];
   let imageFirebaseUrls = [];
+
+  useEffect(() => {
+    let entryData = entries.find((e) => e.id === entryId);
+    setEntryToEdit(entryData);
+  }, [entryId, entries])
 
   const handleFirebaseUploads = async (event) => {
     for (let i = 0; i < selectedImages.length; i++) {
@@ -98,7 +104,7 @@ const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
       <form onSubmit={createEntry}>
         <ul className="entry-form">
           <li className="category-select">
-            <select name="category" onChange={categorySelected}>
+            <select name="category" value={entryToEdit?.category} onChange={categorySelected}>
               <option value="">Select a Category</option>
               <option value="addNewCategory">Add New Category...</option>
               {categories.map(function (category) {
@@ -107,24 +113,24 @@ const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
             </select>
           </li>
           <li className="title-input">
-            <input type="text" name="title" autoComplete="off" placeholder="Title" />
+            <input type="text" name="title" autoComplete="off" placeholder="Title" value={entryToEdit?.title} />
           </li>
           <li>
-            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary"></textarea>
+            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" value={entryToEdit?.summary}></textarea>
           </li>
           <li>
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <li>
             <ul>
-              {selectedImages.map(function (image, index) {
+              {/* {entryToEdit.images.map(function (image, index) {
                 return (
                   <li key={index} className="image-wrapper">
                     <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
                     <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
                   </li>
                 )
-              })}
+              })} */}
             </ul>
           </li>
           <li className="submit-button">
