@@ -112,19 +112,21 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
           <li>
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
+          <li>
+            <ul>
+              {selectedImages.map(function (image, index) {
+                return (
+                  <li key={index} className="image-wrapper">
+                    <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
+                    <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
+                  </li>
+                )
+              })}
+            </ul>
+          </li>
           <li className="submit-button">
             <button type="submit" className="add-entry-button">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
           </li>
-        </ul>
-        <ul>
-          {selectedImages.map(function (image, index) {
-            return (
-              <li key={index} className="image-wrapper">
-                <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
-                <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
-              </li>
-            )
-          })}
         </ul>
       </form >
 
