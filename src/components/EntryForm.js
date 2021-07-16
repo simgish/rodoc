@@ -15,37 +15,20 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   const handleFirebaseUploads = async (event) => {
 
     for (let i = 0; i < selectedImages.length; i++) {
-      const uploadTask = storage.ref(`/images/${selectedImages[i].name}`).put(selectedImages[i]).then(snapshot => {
-        return snapshot.ref.getDownloadURL();   // Will return a promise with the download link
+      const fileName = selectedImages[i].name.substr(selectedImages[i].name.lastIndexOf('\\') + 1).split('.')[0];
+      const extension = selectedImages[i].type.split('/')[1];
+      const uniqueFilename = fileName + '-' + Math.random().toString(36).substr(2, 9) + '.' + extension;
+
+      const uploadTask = storage.ref(`/images/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
+        return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
-        console.log(`Successfully uploaded file and got download link - ${downloadURL}`);
         imageFirebaseUrls.push(downloadURL);
-        return downloadURL;
      })
   
      .catch(error => {
-        // Use to signal error if something goes wrong.
         console.log(`Failed to upload file and get link - ${error}`);
      });
       promises.push(uploadTask);
-
-      // uploadTask.on('state_changed',
-      //   (snapShot) => {
-      //     // console.log(snapShot)
-      //   }, (err) => {
-      //     console.log(err)
-      //   }, () => {
-      //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-      //       console.log('File available at', downloadURL);
-      //       return downloadURL;
-      //     });
-      //     // storage.ref('images').child(selectedImages[i].name).getDownloadURL()
-      //     //   .then(fireBaseUrl => {
-      //     //     console.log(fireBaseUrl);
-      //     //     imageFirebaseUrls.push(fireBaseUrl);
-      //     //     return fireBaseUrl;
-      //     //   })
-      //   })
     }
   }
 
