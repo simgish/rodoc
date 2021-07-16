@@ -40,7 +40,7 @@ function App() {
       </header>
       <Router>
         <div>
-          <ul>
+          <ul className="nav-links">
             <li>
               <Link to="/">Home</Link>
             </li>
