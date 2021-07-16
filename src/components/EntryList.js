@@ -1,7 +1,8 @@
 const EntryList = ({ entries }) => {
 
   const updateEntry = (id) => {
-    console.log(id);
+    let entryToEdit = entries.find((e) => e.id === id);
+    console.log(entryToEdit);
   }
 
   return (
@@ -10,7 +11,7 @@ const EntryList = ({ entries }) => {
         {entries.map(entry => {
           return (
             <li key={entry.id} onClick={() => updateEntry(entry.id)}>
-              {entry.title}
+              {entry.title} - {entry.images.length} photos
             </li>
           )
         })}
