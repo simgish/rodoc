@@ -9,11 +9,10 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
-  const promises = [];
+  let promises = [];
   let imageFirebaseUrls = [];
 
   const handleFirebaseUploads = async (event) => {
-
     for (let i = 0; i < selectedImages.length; i++) {
       const fileName = selectedImages[i].name.substr(selectedImages[i].name.lastIndexOf('\\') + 1).split('.')[0];
       const extension = selectedImages[i].type.split('/')[1];
@@ -36,7 +35,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     await handleFirebaseUploads();
     Promise.all(promises).then(tasks => {
       Promise.all(tasks).then((downloadUrl) => {
-        imageFirebaseUrls.push(downloadUrl);
+        // imageFirebaseUrls.push(downloadUrl);
       });
 
       console.log('images: ', imageFirebaseUrls);
@@ -52,12 +51,15 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
       console.log(entry);
       return entry;
-      
+
     }).then((entry) => {
       db.collection("entries").add(entry).then(firestoreResult => {
         entry.id = firestoreResult.id;
         addNewEntry(entry);
-      });
+      })
+        .catch(error => {
+          throw new Error(`Error adding entry: ${error}`);
+        });
     });
 
   };
