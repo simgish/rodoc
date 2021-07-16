@@ -56,6 +56,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       db.collection("entries").add(entry).then(firestoreResult => {
         entry.id = firestoreResult.id;
         addNewEntry(entry);
+        resetForm(event);
       })
         .catch(error => {
           throw new Error(`Error adding entry: ${error}`);
@@ -88,6 +89,11 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     if (showAddCategoryModal) {
       return <AddCategoryModal addNewCategory={addNewCategory} closeModal={closeAddCategoryModal} />
     }
+  }
+
+  const resetForm = (event) => {
+    setSelectedImages([]);
+    event.target.reset();
   }
 
   return (
