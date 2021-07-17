@@ -37,9 +37,12 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     }
   }
 
-  const createEntry = async (event) => {
+  const updateEntry = async (event) => {
     event.preventDefault();
-    await handleFirebaseUploads();
+    // check to see if user has files to upload first
+    // await handleFirebaseUploads();
+    console.log(entryToEdit);
+
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const date = new Date();
@@ -49,17 +52,15 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
         summary: event.target.summary.value,
         createdAt: date.toUTCString(),
         updatedAt: date.toUTCString(),
-        images: imageFirebaseUrls
+        // images: imageFirebaseUrls
       }
 
       console.log(entry);
       return entry;
 
     }).then((entry) => {
-      db.collection("entries").add(entry).then(firestoreResult => {
-        entry.id = firestoreResult.id;
-        editEntry(entry);
-        resetForm(event);
+      db.collection("entries").doc(entryId).update(entry).then(() => {
+        editEntry(entryId, entry);
       })
         .catch(error => {
           throw new Error(`Error adding entry: ${error}`);
@@ -81,6 +82,8 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   const categorySelected = (e) => {
     if (e.target.value === 'addNewCategory') {
       setShowAddCategoryModal(true);
+    } else {
+      setEntryToEdit({...entryToEdit, category: e.target.value});
     }
   }
 
@@ -121,7 +124,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
 
   return (
     <div className="entry-form-wrapper">
-      <form onSubmit={createEntry}>
+      <form onSubmit={updateEntry}>
         <ul className="entry-form">
           <li className="category-select">
             <select name="category" value={entryToEdit?.category} onChange={categorySelected}>
@@ -133,10 +136,10 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
             </select>
           </li>
           <li className="title-input">
-            <input type="text" name="title" autoComplete="off" placeholder="Title" value={entryToEdit?.title || ''} onChange={() => {}} />
+            <input type="text" name="title" autoComplete="off" placeholder="Title" defaultValue={entryToEdit?.title || ''} onChange={() => {}} />
           </li>
           <li>
-            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" value={entryToEdit?.summary || ''} onChange={() => {}}></textarea>
+            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" defaultValue={entryToEdit?.summary || ''} onChange={() => {}}></textarea>
           </li>
           <li>
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />

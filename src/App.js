@@ -30,6 +30,11 @@ function App() {
     setEntries(entries.concat(entry));
   }
 
+  const editEntry = (entryId, entry) => {
+    console.log(entry);
+    console.log('updating entry: ', entryId);
+  }
+
   const addCategory = (category) => {
     setCategories(categories.concat(category));
   }
@@ -67,7 +72,7 @@ function App() {
               <EntryList entries={entries} />
             </Route>
             <Route path="/edit-entry/:entryId">
-              <EntryEditForm editEntry={addNewEntry} categories={categories} entries={entries} />
+              <EntryEditForm editEntry={editEntry} categories={categories} entries={entries} />
             </Route>
           </Switch>
         </div>
