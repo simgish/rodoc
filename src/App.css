@@ -36,31 +36,31 @@ button {
   width: 100%;
 }
 
-.entry-form {
+.entry-form-wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 1em;
 }
 
-.entry-form form {
+.entry-form-wrapper form {
   width: 25em;
 }
 
-.entry-form ul {
+ul.entry-form {
   list-style-type: none;
   flex-direction: column;
 }
 
-.entry-form ul li {
+ul.entry-form li {
   margin: 0.3rem 0;
 }
 
-.entry-form select {
+ul.entry-form select {
   padding: 0.5rem;
   cursor: pointer;
 }
 
-.entry-form input {
+ul.entry-form input {
   padding: 0.5rem;
 }
 
@@ -191,4 +191,10 @@ form button {
 .nav-links li a {
   color: white;
   text-decoration: none;
+}
+
+.images-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }

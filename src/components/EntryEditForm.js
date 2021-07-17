@@ -101,13 +101,12 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
 
   const renderExistingImages = () => {
     if (!Array.isArray(entryToEdit?.images)) {
-      console.log(entryToEdit);
       return;
     } else {
       console.log(entryToEdit.images);
     }
     return (
-      <ul>
+      <ul className="images-list">
         {entryToEdit.images.map(function (image, index) {
           return (
             <li key={index} className="image-wrapper">
@@ -121,7 +120,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   }
 
   return (
-    <div className="entry-form">
+    <div className="entry-form-wrapper">
       <form onSubmit={createEntry}>
         <ul className="entry-form">
           <li className="category-select">
@@ -134,15 +133,15 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
             </select>
           </li>
           <li className="title-input">
-            <input type="text" name="title" autoComplete="off" placeholder="Title" value={entryToEdit?.title} />
+            <input type="text" name="title" autoComplete="off" placeholder="Title" value={entryToEdit?.title || ''} onChange={() => {}} />
           </li>
           <li>
-            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" value={entryToEdit?.summary}></textarea>
+            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" value={entryToEdit?.summary || ''} onChange={() => {}}></textarea>
           </li>
           <li>
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
-          <ul>
+          <ul className="images-list">
               {selectedImages.map(function (image, index) {
                 return (
                   <li key={index} className="image-wrapper">

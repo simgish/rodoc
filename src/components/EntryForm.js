@@ -94,7 +94,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   }
 
   return (
-    <div className="entry-form">
+    <div className="entry-form-wrapper">
       <form onSubmit={createEntry}>
         <ul className="entry-form">
           <li className="category-select">
@@ -116,7 +116,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <li>
-            <ul>
+            <ul className="images-list">
               {selectedImages.map(function (image, index) {
                 return (
                   <li key={index} className="image-wrapper">
