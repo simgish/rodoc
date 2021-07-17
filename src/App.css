@@ -85,6 +85,7 @@ ul.entry-form input {
 }
 
 .entry-list-container ul li a {
+  display: block;
   color: white;
   text-decoration: none;
 }
