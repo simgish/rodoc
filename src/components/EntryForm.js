@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AddCategoryModal from './AddCategoryModal';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
+import firebase from 'firebase/app';
 
 const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
@@ -35,14 +36,13 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
-      const date = new Date();
       const entry = {
         isHidden: false,
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
-        createdAt: date.toUTCString(),
-        updatedAt: date.toUTCString(),
+        createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+        updatedAt: firebase.firestore.Timestamp.fromDate(new Date()),
         images: imageFirebaseUrls
       }
 

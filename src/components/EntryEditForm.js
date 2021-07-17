@@ -5,6 +5,7 @@ import AddCategoryModal from './AddCategoryModal';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
+import firebase from 'firebase/app';
 
 const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   const [entryToEdit, setEntryToEdit] = useState({});
@@ -50,8 +51,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
-        createdAt: date.toUTCString(),
-        updatedAt: date.toUTCString(),
+        updatedAt: firebase.firestore.Timestamp.fromDate(new Date()),
         // images: imageFirebaseUrls
       }
 
