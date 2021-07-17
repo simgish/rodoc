@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react';
 import AddCategoryModal from './AddCategoryModal';
 import db from '../firebase.config';
@@ -46,7 +46,6 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
 
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
-      const date = new Date();
       const entry = {
         // id: entryId,
         category: event.target.category.value,
@@ -96,11 +95,6 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     if (showAddCategoryModal) {
       return <AddCategoryModal addNewCategory={addNewCategory} closeModal={closeAddCategoryModal} />
     }
-  }
-
-  const resetForm = (event) => {
-    setSelectedImages([]);
-    event.target.reset();
   }
 
   const renderExistingImages = () => {
