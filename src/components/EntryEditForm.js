@@ -48,6 +48,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
       console.log('images: ', imageFirebaseUrls);
       const date = new Date();
       const entry = {
+        // id: entryId,
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
@@ -106,7 +107,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     if (!Array.isArray(entryToEdit?.images)) {
       return;
     } else {
-      console.log(entryToEdit.images);
+      // console.log(entryToEdit.images);
     }
     return (
       <ul className="images-list">

@@ -31,8 +31,17 @@ function App() {
   }
 
   const editEntry = (entryId, entry) => {
-    console.log(entry);
-    console.log('updating entry: ', entryId);
+    db.collection("entries")
+      .orderBy("createdAt", "desc")
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setEntries(data);
+      });
   }
 
   const addCategory = (category) => {
