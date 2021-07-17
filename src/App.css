@@ -84,6 +84,11 @@ ul.entry-form input {
   cursor: pointer;
 }
 
+.entry-list-container ul li a {
+  color: white;
+  text-decoration: none;
+}
+
 .submit-button {
   display: flex;
   justify-content: center;

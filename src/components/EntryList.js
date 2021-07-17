@@ -12,11 +12,11 @@ const EntryList = ({ entries }) => {
       <ul>
         {entries.map(entry => {
           return (
-            <Link to={`/edit-entry/${entry.id}`}>
-              <li key={entry.id} onClick={() => updateEntry(entry.id)}>
+            <li key={entry.id} onClick={() => updateEntry(entry.id)}>
+              <Link to={`/edit-entry/${entry.id}`}>
                 {entry.title} - {entry.images.length} photos
-              </li>
-            </Link>
+              </Link>
+            </li>
           )
         })}
       </ul>
