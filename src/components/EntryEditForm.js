@@ -158,7 +158,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
             {renderExistingImages()}
           </li>
           <li className="submit-button">
-            <button type="submit" className="add-entry-button">Add Entry <FontAwesomeIcon icon={faPlusSquare} /></button>
+            <button type="submit" className="add-entry-button">Save</button>
           </li>
         </ul>
       </form >
