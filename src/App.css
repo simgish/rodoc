@@ -90,6 +90,10 @@ ul.entry-form input {
   text-decoration: none;
 }
 
+.entry-list-container span.created-date {
+  float: right;
+}
+
 .submit-button {
   display: flex;
   justify-content: center;
@@ -177,11 +181,10 @@ form button {
 .nav-links {
   display: flex;
   list-style-type: none;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
-  width: 25em;
   align-items: center;
   background-color: #222;
   border-radius: 5px;

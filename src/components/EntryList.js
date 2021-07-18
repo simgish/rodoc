@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const EntryList = ({ entries }) => {
 
@@ -14,7 +15,8 @@ const EntryList = ({ entries }) => {
           return (
             <li key={entry.id} onClick={() => updateEntry(entry.id)}>
               <Link to={`/edit-entry/${entry.id}`}>
-                {entry.title} - {entry.images.length} photos
+                <span>{entry.title} - {entry.images.length} photos</span>
+                <span className="created-date">{format(entry.createdAt.toDate(), 'iii, LLL Mo, yy')}</span>
               </Link>
             </li>
           )
