@@ -34,13 +34,14 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
-    
-    return;
+    const selectedEmotion = event.target.emotion.value || 'neutral';
+
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const entry = {
         isHidden: false,
+        emotion: selectedEmotion,
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
@@ -81,10 +82,6 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     }
   }
 
-  const emotionSelected = (e) => {
-    console.log(e.target.value);
-  }
-
   const closeAddCategoryModal = () => {
     setShowAddCategoryModal(false);
   }
@@ -105,7 +102,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       <form onSubmit={createEntry}>
         <ul className="entry-form">
           <li>
-            <EmoticonSelector onSelectEmotion={emotionSelected} />
+            <EmoticonSelector name="emotion" />
           </li>
           <li className="category-select">
             <select name="category" onChange={categorySelected}>

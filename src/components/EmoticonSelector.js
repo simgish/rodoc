@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFrown, faSmile } from '@fortawesome/free-solid-svg-icons'
 
-const EmoticonSelector = ({onSelectEmotion}) => {
+const EmoticonSelector = () => {
     return (
-        <span className="emotion-selector" onChange={onSelectEmotion}>
+        <span className="emotion-selector">
             <label for="happy">
                 <input type="radio" name="emotion" value="happy" id="happy" />
                 <FontAwesomeIcon icon={faSmile} />
