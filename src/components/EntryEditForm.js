@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react';
 import AddCategoryModal from './AddCategoryModal';
+import EmoticonSelector from './EmoticonSelector';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
@@ -42,12 +43,14 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     event.preventDefault();
     // check to see if user has files to upload first
     // await handleFirebaseUploads();
+    const selectedEmotion = event.target.emotion.value || 'neutral';
     console.log(entryToEdit);
 
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const entry = {
-        // id: entryId,
+        isHidden: false,
+        emotion: selectedEmotion,
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
@@ -83,7 +86,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     if (e.target.value === 'addNewCategory') {
       setShowAddCategoryModal(true);
     } else {
-      setEntryToEdit({...entryToEdit, category: e.target.value});
+      setEntryToEdit({ ...entryToEdit, category: e.target.value });
     }
   }
 
@@ -95,6 +98,10 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     if (showAddCategoryModal) {
       return <AddCategoryModal addNewCategory={addNewCategory} closeModal={closeAddCategoryModal} />
     }
+  }
+
+  const handleEmotionChange = (e) => {
+    setEntryToEdit({ ...entryToEdit, emotion: e.target.value });
   }
 
   const renderExistingImages = () => {
@@ -121,6 +128,9 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     <div className="entry-form-wrapper">
       <form onSubmit={updateEntry}>
         <ul className="entry-form">
+          <li>
+            <EmoticonSelector name="emotion" value={entryToEdit?.emotion} handleEmotionChange={handleEmotionChange} />
+          </li>
           <li className="category-select">
             <select name="category" value={entryToEdit?.category} onChange={categorySelected}>
               <option value="">Select a Category</option>
@@ -131,24 +141,24 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
             </select>
           </li>
           <li className="title-input">
-            <input type="text" name="title" autoComplete="off" placeholder="Title" defaultValue={entryToEdit?.title || ''} onChange={() => {}} />
+            <input type="text" name="title" autoComplete="off" placeholder="Title" defaultValue={entryToEdit?.title || ''} onChange={() => { }} />
           </li>
           <li>
-            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" defaultValue={entryToEdit?.summary || ''} onChange={() => {}}></textarea>
+            <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" defaultValue={entryToEdit?.summary || ''} onChange={() => { }}></textarea>
           </li>
           <li>
             <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <ul className="images-list">
-              {selectedImages.map(function (image, index) {
-                return (
-                  <li key={index} className="image-wrapper">
-                    <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
-                    <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
-                  </li>
-                )
-              })}
-            </ul>
+            {selectedImages.map(function (image, index) {
+              return (
+                <li key={index} className="image-wrapper">
+                  <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
+                  <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
+                </li>
+              )
+            })}
+          </ul>
           <li>
             {renderExistingImages()}
           </li>
