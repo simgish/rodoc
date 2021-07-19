@@ -69,6 +69,11 @@ ul.entry-form input {
   justify-content: center;
 }
 
+.entry-list-container .left-group {
+  display: flex;
+  align-items: center;
+}
+
 .entry-list-container ul {
   display: flex;
   flex-direction: column-reverse;
@@ -97,7 +102,7 @@ ul.entry-form input {
 
 /* happy */
 .entry-list-container ul li.happy {
-  background-color: #49d053;
+  background-color: limegreen;
 }
 
 .entry-list-container ul li.happy a {
@@ -120,6 +125,7 @@ ul.entry-form input {
 .list-emoticon {
   color: white;
   font-size: 1.5em;
+  margin-right: 0.5rem;
 }
 
 .submit-button {
