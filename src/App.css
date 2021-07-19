@@ -77,21 +77,49 @@ ul.entry-form input {
 }
 
 .entry-list-container ul li {
-  background-color: black;
-  padding: 0.5rem;
+  color: black;
+  background-color: #d2b3bc;
+  padding: 0.2rem 0.5rem;
   margin: 0.3rem 0;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
 }
 
 .entry-list-container ul li a {
-  display: block;
-  color: white;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-decoration: none;
+  font-size: 0.9em;
+}
+
+/* happy */
+.entry-list-container ul li.happy {
+  background-color: #49d053;
+}
+
+.entry-list-container ul li.happy a {
+  color: black;
+}
+
+/* sad */
+.entry-list-container ul li.sad {
+  background-color: #c5355d;
+}
+
+.entry-list-container ul li.sad a {
+  color: black;
 }
 
 .entry-list-container span.created-date {
   float: right;
+}
+
+.list-emoticon {
+  color: white;
+  font-size: 1.5em;
 }
 
 .submit-button {
