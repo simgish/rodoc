@@ -10,10 +10,10 @@ const EntryList = ({ entries }) => {
     // let entryToEdit = entries.find((e) => e.id === id);
   }
 
-  const renderEmoticon = (emoticon) => {
-    if (emoticon === 'happy') {
+  const renderEmoticon = (emotion) => {
+    if (emotion === 'happy') {
       return <FontAwesomeIcon icon={faSmile} />
-    } else if (emoticon === 'sad') {
+    } else if (emotion === 'sad') {
       return <FontAwesomeIcon icon={faFrown} />
     }
   }

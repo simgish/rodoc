@@ -241,3 +241,8 @@ form button {
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
+.emotion-selector input[type=radio]{
+  /* position: absolute; */
+  /* left: -9999px; */
+}

@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import AddCategoryModal from './AddCategoryModal';
+import EmoticonSelector from './EmoticonSelector';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import firebase from 'firebase/app';
@@ -33,6 +34,8 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
+    
+    return;
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
@@ -78,6 +81,10 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     }
   }
 
+  const emotionSelected = (e) => {
+    console.log(e.target.value);
+  }
+
   const closeAddCategoryModal = () => {
     setShowAddCategoryModal(false);
   }
@@ -97,6 +104,9 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     <div className="entry-form-wrapper">
       <form onSubmit={createEntry}>
         <ul className="entry-form">
+          <li>
+            <EmoticonSelector onSelectEmotion={emotionSelected} />
+          </li>
           <li className="category-select">
             <select name="category" onChange={categorySelected}>
               <option value="">Select a Category</option>
