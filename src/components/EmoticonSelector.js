@@ -4,13 +4,13 @@ import { faFrown, faSmile } from '@fortawesome/free-solid-svg-icons'
 const EmoticonSelector = ({onSelectEmotion}) => {
     return (
         <span className="emotion-selector" onChange={onSelectEmotion}>
-            <input type="radio" name="emotion" value="happy"  />
             <label for="happy">
+                <input type="radio" name="emotion" value="happy" id="happy" />
                 <FontAwesomeIcon icon={faSmile} />
             </label>
 
-            <input type="radio" name="emotion" value="sad" />
             <label for="sad">
+                <input type="radio" name="emotion" value="sad" id="sad" />
                 <FontAwesomeIcon icon={faFrown} />
             </label>
         </span>

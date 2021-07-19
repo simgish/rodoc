@@ -243,6 +243,18 @@ form button {
 }
 
 .emotion-selector input[type=radio]{
-  /* position: absolute; */
-  /* left: -9999px; */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.emotion-selector [type=radio] + svg {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+.emotion-selector [type=radio]:checked + svg {
+  border: 1px dashed;
+  border-radius: 5px;
 }
