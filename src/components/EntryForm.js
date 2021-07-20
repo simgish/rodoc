@@ -34,14 +34,13 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
-    const selectedEmotion = event.target.emotion.value || 'neutral';
 
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const entry = {
         isHidden: false,
-        emotion: selectedEmotion,
+        emotion: event.target.emotion.value || 'neutral',
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
