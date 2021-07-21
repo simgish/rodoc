@@ -26,16 +26,17 @@ const firebaseConfig = {
 
 
 const initFirebase = firebase.initializeApp(firebaseConfig);
+const db = initFirebase.firestore();
+const storage = initFirebase.storage();
 const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider()
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
 export const signInWithGoogle = () => {
   auth.signInWithPopup(googleProvider).then((res) => {
     console.log(res.user)
   }).catch((error) => {
     console.log(error.message)
   })
-}
-const db = initFirebase.firestore();
-const storage = initFirebase.storage();
+};
 
 export { db as default, auth, storage }
