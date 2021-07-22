@@ -3,7 +3,6 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react';
 import AddCategoryModal from './AddCategoryModal';
 import EmoticonSelector from './EmoticonSelector';
-import Login from './Login';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
@@ -129,9 +128,6 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     <div className="entry-form-wrapper">
       <form onSubmit={updateEntry}>
         <ul className="entry-form">
-          <li>
-          <Login />
-          </li>
           <li>
             <EmoticonSelector name="emotion" value={entryToEdit?.emotion} handleEmotionChange={handleEmotionChange} />
           </li>
