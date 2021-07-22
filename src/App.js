@@ -1,10 +1,13 @@
 import './App.css';
+// import Login from './components/Login';
+// import Logout from './components/Logout';
+import LogInOut from './components/LogInOut';
 import Dashboard from './components/Dashboard';
 import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import EntryEditForm from './components/EntryEditForm';
 import { useState, useEffect, useContext } from 'react';
-import db, { logOut, signInWithGoogle } from './firebase.config';
+import db from './firebase.config';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import UserProvider, { UserContext } from './providers/UserProvider';
 
@@ -12,7 +15,6 @@ function App() {
   const [entries, setEntries] = useState([]);
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
   const user = useContext(UserContext);
-  console.log(user);
 
   useEffect(() => {
     db.collection("entries")
@@ -58,12 +60,6 @@ function App() {
         <header>
           <h1>RoDoc</h1>
         </header>
-        <div>
-          <button onClick={signInWithGoogle}>Log In</button>
-        </div>
-        <div>
-          <button onClick={logOut}>Log Out</button>
-        </div>
         <Router>
           <div>
             <ul className="nav-links">
@@ -79,6 +75,16 @@ function App() {
             </ul>
 
             {/* <hr /> */}
+
+            {/* <div>
+              login: 
+              {showLogin()}
+            </div>
+            <div>
+              logout:
+              {showLogout()}
+            </div> */}
+            <LogInOut />
 
             <Switch>
               <Route exact path="/">
