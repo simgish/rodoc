@@ -76,14 +76,6 @@ function App() {
 
             {/* <hr /> */}
 
-            {/* <div>
-              login: 
-              {showLogin()}
-            </div>
-            <div>
-              logout:
-              {showLogout()}
-            </div> */}
             <LogInOut />
 
             <Switch>

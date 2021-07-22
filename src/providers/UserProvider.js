@@ -18,7 +18,6 @@ const UserProvider = (props) => {
           email,
         });
       } else {
-        console.log(user);
         setUser(null);
         setRedirect('/dashboard');
       }
