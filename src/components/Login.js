@@ -7,10 +7,11 @@ import { Redirect } from 'react-router-dom';
 const Login = () => {
   const user = useContext(UserContext);
   const [redirect, setRedirect] = useState(null);
+
   useEffect(() => {
     if (user) {
       console.log(user);
-      setRedirect('/entries');
+      // setRedirect('/entries');
     }
   }, [user])
 

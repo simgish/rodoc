@@ -1,15 +1,18 @@
 import './App.css';
+import Dashboard from './components/Dashboard';
 import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import EntryEditForm from './components/EntryEditForm';
-import { useState, useEffect } from 'react';
-import db from './firebase.config';
+import { useState, useEffect, useContext } from 'react';
+import db, { logOut, signInWithGoogle } from './firebase.config';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import UserProvider from './providers/UserProvider';
+import UserProvider, { UserContext } from './providers/UserProvider';
 
 function App() {
   const [entries, setEntries] = useState([]);
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
+  const user = useContext(UserContext);
+  console.log(user);
 
   useEffect(() => {
     db.collection("entries")
@@ -55,11 +58,17 @@ function App() {
         <header>
           <h1>RoDoc</h1>
         </header>
+        <div>
+          <button onClick={signInWithGoogle}>Log In</button>
+        </div>
+        <div>
+          <button onClick={logOut}>Log Out</button>
+        </div>
         <Router>
           <div>
             <ul className="nav-links">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
                 <Link to="/entries">Entries</Link>
@@ -73,8 +82,7 @@ function App() {
 
             <Switch>
               <Route exact path="/">
-                {/* <Home /> */}
-                <EntryList entries={entries} />
+                <Dashboard entries={entries} />
               </Route>
               <Route path="/entry">
                 <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories} />

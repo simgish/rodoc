@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFrown, faSmile } from '@fortawesome/free-solid-svg-icons'
-import Login from './Login';
 
 const EntryList = ({ entries }) => {
 
@@ -22,17 +21,16 @@ const EntryList = ({ entries }) => {
   return (
     <div className="entry-list-container">
       <ul>
-      <Login />
         {entries.map(entry => {
           return (
             <li key={entry.id} onClick={() => updateEntry(entry.id)} className="happy">
               <Link to={`/edit-entry/${entry.id}`}>
                 <span className="left-group">
                   <span className="list-emoticon">{renderEmoticon('happy')}</span>
-                <span>{entry.title} - {entry.images.length} photos</span>
+                  <span>{entry.title} - {entry.images.length} photos</span>
                 </span>
                 <span className="right-group">
-                <span className="created-date">{format(entry.createdAt.toDate(), 'iii, LLL M, yy')}</span>
+                  <span className="created-date">{format(entry.createdAt.toDate(), 'iii, LLL M, yy')}</span>
                 </span>
               </Link>
             </li>

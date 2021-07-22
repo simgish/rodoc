@@ -39,4 +39,12 @@ export const signInWithGoogle = () => {
   })
 };
 
+export const logOut = () => {
+  auth.signOut().then(()=> {
+    console.log('logged out')
+  }).catch((error) => {
+    console.log(error.message)
+  })
+};
+
 export { db as default, auth, storage }
