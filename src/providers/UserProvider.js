@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import { auth } from '../firebase.config';
 
-export const UserContext = createContext({ user: null });
+export const UserContext = createContext({ user: null});
 
 const UserProvider = (props) => {
   const [user, setUser] = useState(null);
@@ -9,9 +9,11 @@ const UserProvider = (props) => {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log(user);
         const { displayName, email } = user;
-        setUser({ displayName, email });
+        setUser({
+          displayName,
+          email,
+        });
       }
     });
   }, []);

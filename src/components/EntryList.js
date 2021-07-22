@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFrown, faSmile } from '@fortawesome/free-solid-svg-icons'
+import Login from './Login';
 
 const EntryList = ({ entries }) => {
 
@@ -21,6 +22,7 @@ const EntryList = ({ entries }) => {
   return (
     <div className="entry-list-container">
       <ul>
+      <Login />
         {entries.map(entry => {
           return (
             <li key={entry.id} onClick={() => updateEntry(entry.id)} className="happy">
