@@ -5,6 +5,7 @@ import EntryEditForm from './components/EntryEditForm';
 import { useState, useEffect } from 'react';
 import db from './firebase.config';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import UserProvider from './providers/UserProvider';
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -49,46 +50,48 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header>
-        <h1>RoDoc</h1>
-      </header>
-      <Router>
-        <div>
-          <ul className="nav-links">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/entries">Entries</Link>
-            </li>
-            <li>
-              <Link to="/entry">Add Entry</Link>
-            </li>
-          </ul>
+    <UserProvider>
+      <div className="App">
+        <header>
+          <h1>RoDoc</h1>
+        </header>
+        <Router>
+          <div>
+            <ul className="nav-links">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/entries">Entries</Link>
+              </li>
+              <li>
+                <Link to="/entry">Add Entry</Link>
+              </li>
+            </ul>
 
-          {/* <hr /> */}
+            {/* <hr /> */}
 
-          <Switch>
-            <Route exact path="/">
-              {/* <Home /> */}
-              <EntryList entries={entries} />
-            </Route>
-            <Route path="/entry">
-              <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories} />
-            </Route>
-            <Route path="/entries">
-              <EntryList entries={entries} />
-            </Route>
-            <Route path="/edit-entry/:entryId">
-              <EntryEditForm editEntry={editEntry} categories={categories} entries={entries} />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-      {/* <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories}/>
+            <Switch>
+              <Route exact path="/">
+                {/* <Home /> */}
+                <EntryList entries={entries} />
+              </Route>
+              <Route path="/entry">
+                <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories} />
+              </Route>
+              <Route path="/entries">
+                <EntryList entries={entries} />
+              </Route>
+              <Route path="/edit-entry/:entryId">
+                <EntryEditForm editEntry={editEntry} categories={categories} entries={entries} />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+        {/* <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories}/>
       <EntryList entries={entries} /> */}
-    </div>
+      </div>
+    </UserProvider>
   );
 }
 
