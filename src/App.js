@@ -1,6 +1,7 @@
 import './App.css';
 // import Login from './components/Login';
 // import Logout from './components/Logout';
+import TopNav from './components/TopNav';
 import LogInOut from './components/LogInOut';
 import Dashboard from './components/Dashboard';
 import EntryForm from './components/EntryForm';
@@ -11,7 +12,7 @@ import db from './firebase.config';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import UserProvider, { UserContext } from './providers/UserProvider';
 
-function App() {
+const App = () => {
   const [entries, setEntries] = useState([]);
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
   const user = useContext(UserContext);
@@ -30,7 +31,9 @@ function App() {
         setEntries(data);
       });
 
-  }, [])
+      console.log(user);
+
+  }, [user]);
 
   const addNewEntry = (entry) => {
     setEntries(entries.concat(entry));
@@ -61,22 +64,11 @@ function App() {
           <h1>RoDoc</h1>
         </header>
         <Router>
+          <LogInOut />
           <div>
-            <ul className="nav-links">
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/entries">Entries</Link>
-              </li>
-              <li>
-                <Link to="/entry">Add Entry</Link>
-              </li>
-            </ul>
+            <TopNav />
 
             {/* <hr /> */}
-
-            <LogInOut />
 
             <Switch>
               <Route exact path="/">
@@ -94,8 +86,6 @@ function App() {
             </Switch>
           </div>
         </Router>
-        {/* <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories}/>
-      <EntryList entries={entries} /> */}
       </div>
     </UserProvider>
   );
