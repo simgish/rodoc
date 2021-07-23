@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../providers/UserProvider';
 import AddCategoryModal from './AddCategoryModal';
 import EmoticonSelector from './EmoticonSelector';
 import db from '../firebase.config';
@@ -8,7 +9,7 @@ import { storage } from '../firebase.config';
 import firebase from 'firebase/app';
 
 const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
-
+  const user = useContext(UserContext);
   const [selectedImages, setSelectedImages] = useState([]);
   const [emotion, setEmotion] = useState('neutral');
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
@@ -35,8 +36,8 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
-    console.log(emotion);
-    return;
+    // console.log('user: ', user);
+    // return;
 
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
@@ -52,7 +53,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
         images: imageFirebaseUrls
       }
 
-      console.log(entry);
+      // console.log(entry);
       return entry;
 
     }).then((entry) => {
@@ -95,10 +96,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   }
 
   const handleEmotionChange = (e) => {
-    // e.target.defaultChecked = true;
-    console.log(e.target.value);
     setEmotion(e.target.value);
-    // setEntryToEdit({ ...entryToEdit, emotion: e.target.value });
   }
 
   const resetForm = (event) => {
