@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
+  const [emotion, setEmotion] = useState('neutral');
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   let promises = [];
   let imageFirebaseUrls = [];
@@ -34,13 +35,15 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
+    console.log(emotion);
+    return;
 
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const entry = {
         isHidden: false,
-        emotion: event.target.emotion.value || 'neutral',
+        emotion: emotion,
         category: event.target.category.value,
         title: event.target.title.value,
         summary: event.target.summary.value,
@@ -91,6 +94,13 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     }
   }
 
+  const handleEmotionChange = (e) => {
+    // e.target.defaultChecked = true;
+    console.log(e.target.value);
+    setEmotion(e.target.value);
+    // setEntryToEdit({ ...entryToEdit, emotion: e.target.value });
+  }
+
   const resetForm = (event) => {
     setSelectedImages([]);
     event.target.reset();
@@ -101,7 +111,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       <form onSubmit={createEntry}>
         <ul className="entry-form">
           <li>
-            <EmoticonSelector name="emotion" />
+            <EmoticonSelector name="emotion" value={emotion} handleEmotionChange={handleEmotionChange} />
           </li>
           <li className="category-select">
             <select name="category" onChange={categorySelected}>
