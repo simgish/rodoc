@@ -83,7 +83,7 @@ ul.entry-form input {
 
 .entry-list-container ul li {
   color: black;
-  background-color: #d2b3bc;
+  background-color: silver;
   padding: 0.2rem 0.5rem;
   margin: 0.3rem 0;
   border-radius: 5px;
@@ -111,10 +111,18 @@ ul.entry-form input {
 
 /* sad */
 .entry-list-container ul li.sad {
-  background-color: #c5355d;
+  background-color: cornflowerblue;
 }
 
 .entry-list-container ul li.sad a {
+  color: black;
+}
+
+.entry-list-container ul li.angry {
+  background-color: crimson;
+}
+
+.entry-list-container ul li.angry a {
   color: black;
 }
 

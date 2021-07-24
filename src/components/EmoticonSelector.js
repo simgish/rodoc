@@ -1,9 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSmile, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
+import { faMehBlank, faSmile, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
 
 const EmoticonSelector = ({value, handleEmotionChange}) => {
     return (
         <span className="emotion-selector">
+            <label htmlFor="neutral">
+                <input type="radio" name="emotion" value="neutral" id="neutral" checked={value === 'neutral'} onChange={handleEmotionChange} />
+                <FontAwesomeIcon icon={faMehBlank} />
+            </label>
+
             <label htmlFor="happy">
                 <input type="radio" name="emotion" value="happy" id="happy" checked={value === 'happy'} onChange={handleEmotionChange} />
                 <FontAwesomeIcon icon={faSmile} />

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSmile, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
+import { faMehBlank, faSmile, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
 
 const EntryList = ({ entries }) => {
 
@@ -11,12 +11,12 @@ const EntryList = ({ entries }) => {
   }
 
   const renderEmoticon = (emotion) => {
-    if (emotion === 'happy') {
+    if (emotion === 'neutral') {
+      return <FontAwesomeIcon icon={faMehBlank} />
+    } else if (emotion === 'happy') {
       return <FontAwesomeIcon icon={faSmile} />
     } else if (emotion === 'sad') {
-      return <FontAwesomeIcon icon={faFrown} />
-    } else if (emotion === 'neutral') {
-      return <FontAwesomeIcon icon={faSmile} />
+      return <FontAwesomeIcon icon={faFrown} /> 
     } else if (emotion === 'angry') {
       return <FontAwesomeIcon icon={faAngry} />
     }
