@@ -72,6 +72,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
   const imageWasSelected = (event) => {
     const selectedImage = event.target.files[0];
     setSelectedImages(selectedImages.concat(selectedImage));
+    document.getElementById('imageUpload').value = '';
   }
 
   const removeImage = (lastModified) => {
@@ -127,7 +128,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
             <textarea className="summary-content" name="summary" rows="10" placeholder="Summary"></textarea>
           </li>
           <li>
-            <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <li>
             <ul className="images-list">
