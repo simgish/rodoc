@@ -12,8 +12,9 @@ const UserProvider = (props) => {
     auth.onAuthStateChanged(async (user) => {
       console.log(user);
       if (user) {
-        const { displayName, email } = user;
+        const { uid, displayName, email } = user;
         setUser({
+          uid,
           displayName,
           email,
         });

@@ -22,7 +22,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       const extension = selectedImages[i].type.split('/')[1];
       const uniqueFilename = fileName + '-' + Math.random().toString(36).substr(2, 9) + '.' + extension;
 
-      const uploadTask = storage.ref(`/images/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
+      const uploadTask = storage.ref(`/images/${user.uid}/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
         return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
         imageFirebaseUrls.push(downloadURL);
