@@ -1,4 +1,4 @@
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from '../providers/UserProvider';
 import { useContext } from 'react';
 
@@ -20,7 +20,7 @@ const TopNav = () => {
       </ul>
     );
   } else {
-    return <ul></ul>
+    return <ul></ul>;
   }
 }
 
