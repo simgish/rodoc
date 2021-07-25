@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMehBlank, faSmile, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
+import { faMehBlank, faSmile, faGrinStars, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
 
 const EntryList = ({ entries }) => {
 
@@ -15,6 +15,8 @@ const EntryList = ({ entries }) => {
       return <FontAwesomeIcon icon={faMehBlank} />
     } else if (emotion === 'happy') {
       return <FontAwesomeIcon icon={faSmile} />
+    } else if (emotion === 'excited') {
+      return <FontAwesomeIcon icon={faGrinStars} />
     } else if (emotion === 'sad') {
       return <FontAwesomeIcon icon={faFrown} /> 
     } else if (emotion === 'angry') {

@@ -109,6 +109,15 @@ ul.entry-form input {
   color: black;
 }
 
+/* excited */
+.entry-list-container ul li.excited {
+  background-color: goldenrod;
+}
+
+.entry-list-container ul li.excited a {
+  color: black;
+}
+
 /* sad */
 .entry-list-container ul li.sad {
   background-color: cornflowerblue;
