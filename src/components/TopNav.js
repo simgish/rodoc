@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { UserContext } from '../providers/UserProvider';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 
 const TopNav = () => {
   const user = useContext(UserContext);
