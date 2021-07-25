@@ -34,7 +34,7 @@ const EntryList = ({ entries }) => {
                   <span>{entry.title} - {entry.images.length} photos</span>
                 </span>
                 <span className="right-group">
-                  <span className="created-date">{format(entry.createdAt.toDate(), 'iii, LLL M, yy')}</span>
+                  <span className="created-date">{format(entry.createdAt.toDate(), 'iii, LLL d, yy')}</span>
                 </span>
               </Link>
             </li>
