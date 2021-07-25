@@ -42,7 +42,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   const updateEntry = async (event) => {
     event.preventDefault();
     // check to see if user has files to upload first
-    // await handleFirebaseUploads();
+    await handleFirebaseUploads();
     const selectedEmotion = event.target.emotion.value || 'neutral';
     console.log(entryToEdit);
 
@@ -75,6 +75,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   const imageWasSelected = (event) => {
     const selectedImage = event.target.files[0];
     setSelectedImages(selectedImages.concat(selectedImage));
+    document.getElementById('imageUpload').value = '';
   }
 
   const removeImage = (lastModified) => {
@@ -147,7 +148,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
             <textarea className="summary-content" name="summary" rows="10" placeholder="Summary" defaultValue={entryToEdit?.summary || ''} onChange={() => { }}></textarea>
           </li>
           <li>
-            <input type="file" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" onChange={imageWasSelected} />
           </li>
           <ul className="images-list">
             {selectedImages.map(function (image, index) {
