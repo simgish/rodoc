@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../providers/UserProvider';
 import AddCategoryModal from './AddCategoryModal';
 import EmoticonSelector from './EmoticonSelector';
 import db from '../firebase.config';
@@ -9,6 +10,7 @@ import { useParams } from "react-router-dom";
 import firebase from 'firebase/app';
 
 const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
+  const user = useContext(UserContext);
   const [entryToEdit, setEntryToEdit] = useState({});
   const { entryId } = useParams();
   const [selectedImages, setSelectedImages] = useState([]);
@@ -27,7 +29,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
       const extension = selectedImages[i].type.split('/')[1];
       const uniqueFilename = fileName + '-' + Math.random().toString(36).substr(2, 9) + '.' + extension;
 
-      const uploadTask = storage.ref(`/images/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
+      const uploadTask = storage.ref(`/images/${user.uid}/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
         return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
         imageFirebaseUrls.push(downloadURL);

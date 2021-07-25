@@ -9,7 +9,7 @@ import EntryList from './components/EntryList';
 import EntryEditForm from './components/EntryEditForm';
 import { useState, useEffect, useContext } from 'react';
 import db from './firebase.config';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserProvider, { UserContext } from './providers/UserProvider';
 
 const App = () => {

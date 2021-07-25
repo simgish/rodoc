@@ -20,7 +20,7 @@ const TopNav = () => {
       </ul>
     );
   } else {
-    return <ul></ul>;
+    return <ul></ul>
   }
 }
 
