@@ -20,7 +20,9 @@ const AddCategoryModal = ({ addNewCategory, closeModal }) => {
                 </li>
                 <li className="submit-button">
                     <button type="submit" className="add-category-button">Add Category <FontAwesomeIcon icon={faPlusSquare} /></button>
-                    <button type="button" className="close-modal-button" onClick={closeModal}>Close <FontAwesomeIcon icon={faTimes} /></button>
+                </li>
+                <li className="submit-button">
+                <button type="button" className="close-modal-button" onClick={closeModal}>Close <FontAwesomeIcon icon={faTimes} /></button>
                 </li>
                 </ul>
             </form>

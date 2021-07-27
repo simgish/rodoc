@@ -43,10 +43,11 @@ button {
 }
 
 .entry-form-wrapper form {
-  width: 25em;
+  width: 100%;
 }
 
 ul.entry-form {
+  display: flex;
   list-style-type: none;
   flex-direction: column;
 }
@@ -111,7 +112,7 @@ ul.entry-form input {
 
 /* excited */
 .entry-list-container ul li.excited {
-  background-color: goldenrod;
+  background-color: gold;
 }
 
 .entry-list-container ul li.excited a {
@@ -190,8 +191,8 @@ ul.entry-form input {
   display: block;
   position: fixed;
   background: #8440cc;
-  width: 50%;
-  height: 50%;
+  width: 95%;
+  height: 100%;
   border-radius: 10px;
   padding: 15px;
 }
