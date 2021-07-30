@@ -25,7 +25,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       const uploadTask = storage.ref(`/images/${user.uid}/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
         return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
-        imageFirebaseUrls.push(downloadURL);
+        imageFirebaseUrls.push({fileName: uniqueFilename, downloadUrl: downloadURL});
       })
         .catch(error => {
           console.log(`Failed to upload file and get link - ${error}`);
@@ -75,7 +75,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     document.getElementById('imageUpload').value = '';
   }
 
-  const removeImage = (lastModified) => {
+  const removeSelectedImage = (lastModified) => {
     const newSelectedImages = selectedImages.filter((img) => img.lastModified !== lastModified);
     setSelectedImages(newSelectedImages);
   }
@@ -135,7 +135,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
               {selectedImages.map(function (image, index) {
                 return (
                   <li key={index} className="image-wrapper">
-                    <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
+                    <span className="image-close-button" onClick={() => removeSelectedImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
                     <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
                   </li>
                 )

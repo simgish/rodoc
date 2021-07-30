@@ -78,9 +78,13 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     document.getElementById('imageUpload').value = '';
   }
 
-  const removeImage = (lastModified) => {
+  const removeSelectedImage = (lastModified) => {
     const newSelectedImages = selectedImages.filter((img) => img.lastModified !== lastModified);
     setSelectedImages(newSelectedImages);
+  }
+
+  const removeExistingImage = (lastModified) => {
+    console.log(lastModified);
   }
 
   const categorySelected = (e) => {
@@ -116,8 +120,8 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
         {entryToEdit.images.map(function (image, index) {
           return (
             <li key={index} className="image-wrapper">
-              <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
-              <img alt="" className="image-selected-preview" src={image} />
+              <span className="image-close-button" onClick={() => removeExistingImage(image.fileName)}><FontAwesomeIcon icon={faTimes} /></span>
+              <img alt="" className="image-selected-preview" src={image.downloadUrl} />
             </li>
           )
         })}
@@ -154,7 +158,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
             {selectedImages.map(function (image, index) {
               return (
                 <li key={index} className="image-wrapper">
-                  <span className="image-close-button" onClick={() => removeImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
+                  <span className="image-close-button" onClick={() => removeSelectedImage(image.lastModified)}><FontAwesomeIcon icon={faTimes} /></span>
                   <img alt="" className="image-selected-preview" src={URL.createObjectURL(image)} />
                 </li>
               )
