@@ -31,7 +31,7 @@ const App = () => {
         setEntries(data);
       });
 
-      console.log(user);
+    console.log(user);
 
   }, [user]);
 
@@ -60,11 +60,13 @@ const App = () => {
   return (
     <UserProvider>
       <div className="App">
-        <header>
-          <h1>RoDoc</h1>
-        </header>
         <Router>
-          <LogInOut />
+          <div className="app-header">
+            <header>
+              <h1>RoDoc</h1>
+            </header>
+            <LogInOut />
+          </div>
           <div>
             <TopNav />
 

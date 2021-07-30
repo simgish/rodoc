@@ -16,6 +16,11 @@ body {
   min-height: 100vh;
 }
 
+.app-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 header {
   font-size: 1.5rem;
   min-height: 5vh;

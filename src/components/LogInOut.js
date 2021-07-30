@@ -12,7 +12,6 @@ const LogInOut = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       setRedirect('/entries');
     } else {
       setRedirect('/dashboard');
