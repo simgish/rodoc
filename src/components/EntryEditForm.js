@@ -46,10 +46,9 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     // check to see if user has files to upload first
     await handleFirebaseUploads();
     const selectedEmotion = event.target.emotion.value || 'neutral';
-    console.log(entryToEdit);
 
     Promise.all(promises).then(() => {
-      console.log('images: ', imageFirebaseUrls);
+      imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
       const entry = {
         isHidden: false,
         emotion: selectedEmotion,
@@ -57,10 +56,9 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
         title: event.target.title.value,
         summary: event.target.summary.value,
         updatedAt: firebase.firestore.Timestamp.fromDate(new Date()),
-        // images: imageFirebaseUrls
+        images: imageFirebaseUrls
       }
 
-      console.log(entry);
       return entry;
 
     }).then((entry) => {
