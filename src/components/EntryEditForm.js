@@ -32,7 +32,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
       const uploadTask = storage.ref(`/images/${user.uid}/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
         return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
-        imageFirebaseUrls.push(downloadURL);
+        imageFirebaseUrls.push({fileName: uniqueFilename, downloadUrl: downloadURL});
       })
         .catch(error => {
           console.log(`Failed to upload file and get link - ${error}`);
