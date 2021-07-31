@@ -14,6 +14,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   const [entryToEdit, setEntryToEdit] = useState({});
   const { entryId } = useParams();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [imagesToDelete, setImagesToDelete] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   let promises = [];
   let imageFirebaseUrls = [];
@@ -32,7 +33,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
       const uploadTask = storage.ref(`/images/${user.uid}/${uniqueFilename}`).put(selectedImages[i]).then(snapshot => {
         return snapshot.ref.getDownloadURL();   // Return a promise with the download link
       }).then(downloadURL => {
-        imageFirebaseUrls.push({fileName: uniqueFilename, downloadUrl: downloadURL});
+        imageFirebaseUrls.push({ fileName: uniqueFilename, downloadUrl: downloadURL });
       })
         .catch(error => {
           console.log(`Failed to upload file and get link - ${error}`);
@@ -41,9 +42,22 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
     }
   }
 
+  const deleteImagesFromStorage = async () => {
+    for (let i = 0; i < imagesToDelete.length; i++) {
+      const deleteTask = storage.ref(`/images/${user.uid}/${imagesToDelete[i]}`);
+
+      deleteTask.delete().then(() => {
+        console.log('deleted: ', imagesToDelete[i]);
+      }).catch((error) => {
+        console.log(`Failed to delete file - ${error}`);
+      });
+    }
+  }
+
   const updateEntry = async (event) => {
     event.preventDefault();
     // check to see if user has files to upload first
+    await deleteImagesFromStorage();
     await handleFirebaseUploads();
     const selectedEmotion = event.target.emotion.value || 'neutral';
 
@@ -85,8 +99,8 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
 
   const removeExistingImage = (fileName) => {
     const newExistingImages = entryToEdit.images.filter((img) => img.fileName !== fileName);
-    setEntryToEdit({...entryToEdit, images: newExistingImages});
-    console.log(entryToEdit);
+    setEntryToEdit({ ...entryToEdit, images: newExistingImages });
+    setImagesToDelete(imagesToDelete.concat(fileName));
   }
 
   const categorySelected = (e) => {
