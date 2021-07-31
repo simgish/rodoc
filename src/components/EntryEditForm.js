@@ -85,6 +85,8 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
 
   const removeExistingImage = (fileName) => {
     const newExistingImages = entryToEdit.images.filter((img) => img.fileName !== fileName);
+    setEntryToEdit({...entryToEdit, images: newExistingImages});
+    console.log(entryToEdit);
   }
 
   const categorySelected = (e) => {
