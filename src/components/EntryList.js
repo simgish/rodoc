@@ -2,8 +2,31 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMehBlank, faSmile, faGrinStars, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../providers/UserProvider';
+import db from '../firebase.config';
 
-const EntryList = ({ entries }) => {
+const EntryList = ({  }) => {
+  const user = useContext(UserContext);
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    db.collection(`users/${user.uid}/entries`)
+      .orderBy("createdAt", "desc")
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        console.log('entries: ', data);
+        setEntries(data);
+      });
+
+    console.log(user);
+
+  }, [user]);
 
   const updateEntry = (id) => {
     return;

@@ -17,23 +17,27 @@ const App = () => {
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
   const user = useContext(UserContext);
 
-  useEffect(() => {
-    db.collection("entries")
-      .orderBy("createdAt", "desc")
-      .get()
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+  const getEntries = async (user) => {
+    console.log('getentries');
+  }
 
-        // console.log('entries: ', data);
-        setEntries(data);
-      });
+  // useEffect(() => {
+  //   db.collection(`users/${user.uid}/entries`)
+  //     .orderBy("createdAt", "desc")
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       const data = querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
 
-    console.log(user);
+  //       // console.log('entries: ', data);
+  //       setEntries(data);
+  //     });
 
-  }, [user]);
+  //   console.log(user);
+
+  // }, [user]);
 
   const addNewEntry = (entry) => {
     setEntries(entries.concat(entry));
@@ -58,7 +62,7 @@ const App = () => {
   }
 
   return (
-    <UserProvider>
+    <UserProvider value={getEntries}>
       <div className="App">
         <Router>
           <div className="app-header">
