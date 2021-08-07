@@ -57,7 +57,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
       return entry;
 
     }).then((entry) => {
-      db.collection("entries").add(entry).then(firestoreResult => {
+      db.collection(`users/${user.uid}/entries`).add(entry).then(firestoreResult => {
         entry.id = firestoreResult.id;
         addNewEntry(entry);
         resetForm(event);

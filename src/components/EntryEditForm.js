@@ -76,7 +76,7 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
       return entry;
 
     }).then((entry) => {
-      db.collection("entries").doc(entryId).update(entry).then(() => {
+      db.collection(`users/${user.uid}/entries`).doc(entryId).update(entry).then(() => {
         editEntry(entryId, entry);
       })
         .catch(error => {

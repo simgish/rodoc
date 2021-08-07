@@ -62,7 +62,7 @@ const App = () => {
   }
 
   return (
-    <UserProvider value={getEntries}>
+    <UserProvider value={user}>
       <div className="App">
         <Router>
           <div className="app-header">
@@ -84,7 +84,7 @@ const App = () => {
                 <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories} />
               </Route>
               <Route path="/entries">
-                <EntryList entries={entries} />
+                <EntryList entries={'asdf'} />
               </Route>
               <Route path="/edit-entry/:entryId">
                 <EntryEditForm editEntry={editEntry} categories={categories} entries={entries} />
