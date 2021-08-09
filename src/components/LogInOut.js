@@ -6,7 +6,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { auth } from '../firebase.config';
 
 const LogInOut = () => {
-  const user = useContext(UserContext);
+  const user = useContext(UserContext).user;
   const history = useHistory();
   const [redirect, setRedirect] = useState(null);
 

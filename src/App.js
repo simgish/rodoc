@@ -7,7 +7,7 @@ import EntryList from './components/EntryList';
 import EntryEditForm from './components/EntryEditForm';
 import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import UserProvider, { UserContext } from './providers/UserProvider';
+import UserProvider from './providers/UserProvider';
 
 const App = () => {
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
