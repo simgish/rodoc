@@ -8,8 +8,10 @@ import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import firebase from 'firebase/app';
 
-const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
-  const user = useContext(UserContext);
+const EntryForm = ({ addNewCategory, categories }) => {
+  const user = useContext(UserContext).user;
+  const entries = useContext(UserContext).entries;
+  const setEntries = useContext(UserContext).setEntries;
   const [selectedImages, setSelectedImages] = useState([]);
   const [emotion, setEmotion] = useState('neutral');
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
@@ -59,7 +61,7 @@ const EntryForm = ({ addNewEntry, addNewCategory, categories }) => {
     }).then((entry) => {
       db.collection(`users/${user.uid}/entries`).add(entry).then(firestoreResult => {
         entry.id = firestoreResult.id;
-        addNewEntry(entry);
+        setEntries(entries.concat(entry));
         resetForm(event);
       })
         .catch(error => {

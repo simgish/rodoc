@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMehBlank, faSmile, faGrinStars, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import { UserContext } from '../providers/UserProvider';
-import { async } from 'q';
 
 const EntryList = () => {
   const user = useContext(UserContext).user;
@@ -12,7 +11,6 @@ const EntryList = () => {
 
   const updateEntry = (id) => {
     return;
-    // let entryToEdit = entries.find((e) => e.id === id);
   }
 
   const renderEmoticon = (emotion) => {

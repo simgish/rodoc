@@ -9,9 +9,10 @@ import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
 import firebase from 'firebase/app';
 
-const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
-  const user = useContext(UserContext);
+const EntryEditForm = ({ addNewCategory, categories }) => {
+  const user = useContext(UserContext).user;
   const entries = useContext(UserContext).entries;
+  const setEntries = useContext(UserContext).setEntries;
   const [entryToEdit, setEntryToEdit] = useState({});
   const { entryId } = useParams();
 
@@ -22,14 +23,25 @@ const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
   let imageFirebaseUrls = [];
 
   useEffect(() => {
-    console.log(entryToEdit);
-    console.log(entryId);
-    console.log(entries);
     let entryData = entries.find((e) => e.id === entryId);
     setEntryToEdit(entryData);
   }, [entryId, entries])
 
-  const handleFirebaseUploads = async (event) => {
+  const editEntry = (entryId, entry) => {
+    db.collection(`users/${user.uid}/entries`)
+      .orderBy("createdAt", "desc")
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setEntries(data);
+      });
+  }
+
+  const handleFirebaseUploads = async () => {
     for (let i = 0; i < selectedImages.length; i++) {
       const fileName = selectedImages[i].name.substr(selectedImages[i].name.lastIndexOf('\\') + 1).split('.')[0];
       const extension = selectedImages[i].type.split('/')[1];
@@ -61,7 +73,6 @@ const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
 
   const updateEntry = async (event) => {
     event.preventDefault();
-    // check to see if user has files to upload first
     await deleteImagesFromStorage();
     await handleFirebaseUploads();
     const selectedEmotion = event.target.emotion.value || 'neutral';

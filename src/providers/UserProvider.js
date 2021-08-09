@@ -38,12 +38,8 @@ const UserProvider = (props) => {
           ...doc.data(),
         }));
 
-        console.log('entries: ', data);
-        console.log('data: ', data);
         setEntries(data);
       });
-
-    console.log(user);
 
   }, [user]);
 
