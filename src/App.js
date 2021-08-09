@@ -24,7 +24,7 @@ const App = () => {
             <header>
               <h1>RoDoc</h1>
             </header>
-            <LogInOut />
+            {/* <LogInOut /> */}
           </div>
           <div>
             <TopNav />
@@ -46,6 +46,9 @@ const App = () => {
               </Route>
             </Switch>
           </div>
+          <div className="loginoutbutton">
+            <LogInOut />
+            </div>
         </Router>
       </div>
     </UserProvider>

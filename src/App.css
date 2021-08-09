@@ -30,7 +30,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
+  margin-top: 0.25em;
 }
 
 header h1 {
@@ -294,4 +295,11 @@ form button {
 .emotion-selector [type=radio]:checked + svg {
   border: 1px dashed white;
   border-radius: 1em;
+}
+
+.loginoutbutton {
+  display: flex;
+  min-height: 15em;
+  align-items: flex-end;
+  justify-content: center;
 }
