@@ -10,7 +10,10 @@
 }
 
 body {
-  background-image: linear-gradient(120deg, #6628ca 0%, #6d0e4a 100%);
+  /* background-image: linear-gradient(120deg, #6628ca 0%, #6d0e4a 100%); */
+  /* background-image: linear-gradient(120deg, #3836b5 0%, #4470b3 100%); */
+  background-image: linear-gradient(120deg, #1f1cbf 0%, #455ac1 100%);
+  /* background-image: linear-gradient(120deg, #455ac1 0%, #1f1cbf 100%); */
   color: white;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;

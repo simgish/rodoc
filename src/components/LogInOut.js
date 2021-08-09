@@ -7,6 +7,7 @@ import { auth } from '../firebase.config';
 
 const LogInOut = () => {
   const user = useContext(UserContext).user;
+  const setEntries = useContext(UserContext).setEntries;
   const history = useHistory();
   const [redirect, setRedirect] = useState(null);
 
@@ -25,6 +26,7 @@ const LogInOut = () => {
 
   const handleLogout = async () => {
     await auth.signOut();
+    setEntries([]);
     history.push("/dashboard");
     
     return <Redirect to='/dashboard' />;
