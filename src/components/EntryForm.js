@@ -38,14 +38,13 @@ const EntryForm = ({ addNewCategory, categories }) => {
 
   const createEntry = async (event) => {
     event.preventDefault();
-    // console.log('user: ', user);
-    // return;
 
     await handleFirebaseUploads();
     Promise.all(promises).then(() => {
       console.log('images: ', imageFirebaseUrls);
       const entry = {
         isHidden: false,
+        isDraft: false,
         emotion: emotion,
         category: event.target.category.value,
         title: event.target.title.value,
@@ -55,7 +54,6 @@ const EntryForm = ({ addNewCategory, categories }) => {
         images: imageFirebaseUrls
       }
 
-      // console.log(entry);
       return entry;
 
     }).then((entry) => {

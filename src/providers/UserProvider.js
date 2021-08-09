@@ -12,7 +12,6 @@ const UserProvider = (props) => {
   
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      console.log(user);
       if (user) {
         const { uid, displayName, email } = user;
         setUser({

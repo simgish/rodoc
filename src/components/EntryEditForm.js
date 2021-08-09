@@ -81,6 +81,7 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
       imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
       const entry = {
         isHidden: false,
+        isDraft: false,
         emotion: selectedEmotion,
         category: event.target.category.value,
         title: event.target.title.value,
