@@ -2,35 +2,13 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMehBlank, faSmile, faGrinStars, faFrown, faAngry } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../providers/UserProvider';
-import db from '../firebase.config';
+import { async } from 'q';
 
 const EntryList = () => {
   const user = useContext(UserContext).user;
   const entries = useContext(UserContext).entries;
-  console.log(user);
-  console.log(entries);
-  // const [entries, setEntries] = useState([]);
-
-  // useEffect(() => {
-  //   if (!user) return;
-  //   db.collection(`users/${user.uid}/entries`)
-  //     .orderBy("createdAt", "desc")
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       const data = querySnapshot.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-
-  //       console.log('entries: ', data);
-  //       setEntries(data);
-  //     });
-
-  //   console.log(user);
-
-  // }, [user]);
 
   const updateEntry = (id) => {
     return;
@@ -54,7 +32,6 @@ const EntryList = () => {
   return (
     <div className="entry-list-container">
       <ul>
-        entries: {entries}
         {entries.map(entry => {
           return (
             <li key={entry.id} onClick={() => updateEntry(entry.id)} className={entry.emotion}>

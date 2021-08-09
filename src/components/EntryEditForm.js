@@ -9,10 +9,12 @@ import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
 import firebase from 'firebase/app';
 
-const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
+const EntryEditForm = ({ editEntry, addNewCategory, categories }) => {
   const user = useContext(UserContext);
+  const entries = useContext(UserContext).entries;
   const [entryToEdit, setEntryToEdit] = useState({});
   const { entryId } = useParams();
+
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagesToDelete, setImagesToDelete] = useState([]);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
