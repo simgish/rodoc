@@ -20,6 +20,9 @@ const EntryEditForm = ({ editEntry, entries, addNewCategory, categories }) => {
   let imageFirebaseUrls = [];
 
   useEffect(() => {
+    console.log(entryToEdit);
+    console.log(entryId);
+    console.log(entries);
     let entryData = entries.find((e) => e.id === entryId);
     setEntryToEdit(entryData);
   }, [entryId, entries])

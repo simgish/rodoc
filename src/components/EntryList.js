@@ -6,27 +6,31 @@ import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../providers/UserProvider';
 import db from '../firebase.config';
 
-const EntryList = ({  }) => {
-  const user = useContext(UserContext);
-  const [entries, setEntries] = useState([]);
+const EntryList = () => {
+  const user = useContext(UserContext).user;
+  const entries = useContext(UserContext).entries;
+  console.log(user);
+  console.log(entries);
+  // const [entries, setEntries] = useState([]);
 
-  useEffect(() => {
-    db.collection(`users/${user.uid}/entries`)
-      .orderBy("createdAt", "desc")
-      .get()
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+  // useEffect(() => {
+  //   if (!user) return;
+  //   db.collection(`users/${user.uid}/entries`)
+  //     .orderBy("createdAt", "desc")
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       const data = querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
 
-        console.log('entries: ', data);
-        setEntries(data);
-      });
+  //       console.log('entries: ', data);
+  //       setEntries(data);
+  //     });
 
-    console.log(user);
+  //   console.log(user);
 
-  }, [user]);
+  // }, [user]);
 
   const updateEntry = (id) => {
     return;
@@ -50,6 +54,7 @@ const EntryList = ({  }) => {
   return (
     <div className="entry-list-container">
       <ul>
+        entries: {entries}
         {entries.map(entry => {
           return (
             <li key={entry.id} onClick={() => updateEntry(entry.id)} className={entry.emotion}>

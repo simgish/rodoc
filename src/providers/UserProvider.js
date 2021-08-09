@@ -1,13 +1,15 @@
 import React, { useState, useEffect, createContext } from "react";
 import { Redirect } from 'react-router-dom';
 import { auth } from '../firebase.config';
+import db from '../firebase.config';
 
 export const UserContext = createContext(null);
 
 const UserProvider = (props) => {
   const [user, setUser] = useState(null);
   const [redirect, setRedirect] = useState(null);
-
+  const [entries, setEntries] = useState([]);
+  
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       console.log(user);
@@ -25,12 +27,35 @@ const UserProvider = (props) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!user) return;
+    db.collection(`users/${user.uid}/entries`)
+      .orderBy("createdAt", "desc")
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        console.log('entries: ', data);
+        console.log('data: ', data);
+        setEntries(data);
+      });
+
+    console.log(user);
+
+  }, [user]);
+
   if (redirect) {
     // return <Redirect to='/dashboard' />;
   }
 
+  const value = {user, entries, setEntries};
+  
+
   return (
-    <UserContext.Provider value={user}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={value}>{props.children}</UserContext.Provider>
   );
 }
 

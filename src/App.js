@@ -18,7 +18,7 @@ const App = () => {
   const user = useContext(UserContext);
 
   const getEntries = async (user) => {
-    console.log('getentries');
+    console.log('getEntries');
   }
 
   // useEffect(() => {
@@ -84,7 +84,7 @@ const App = () => {
                 <EntryForm addNewEntry={addNewEntry} addNewCategory={addCategory} categories={categories} />
               </Route>
               <Route path="/entries">
-                <EntryList entries={'asdf'} />
+                <EntryList />
               </Route>
               <Route path="/edit-entry/:entryId">
                 <EntryEditForm editEntry={editEntry} categories={categories} entries={entries} />
