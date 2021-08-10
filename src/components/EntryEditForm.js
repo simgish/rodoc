@@ -41,6 +41,25 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
       });
   }
 
+  const deleteEntry = async () => {
+    imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
+    console.log('imageFirebaseUrls', imageFirebaseUrls);
+    setImagesToDelete(imageFirebaseUrls);
+    await deleteImagesFromStorage();
+    const newEntries = entries.filter((e) => e.id !== entryToEdit.id);
+    console.log('entries: ', entries);
+    console.log('newEntries: ', newEntries);
+
+    db.collection(`users/${user.uid}/entries`).doc(entryId).delete().then(() => {
+      console.log('deleted entry: ', entryToEdit);
+    })
+      .catch(error => {
+        throw new Error(`Error deleting entry: ${error}`);
+      });
+    
+    setEntries(newEntries);
+  }
+
   const handleFirebaseUploads = async () => {
     for (let i = 0; i < selectedImages.length; i++) {
       const fileName = selectedImages[i].name.substr(selectedImages[i].name.lastIndexOf('\\') + 1).split('.')[0];
@@ -60,11 +79,11 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
   }
 
   const deleteImagesFromStorage = async () => {
-    for (let i = 0; i < imagesToDelete.length; i++) {
-      const deleteTask = storage.ref(`/images/${user.uid}/${imagesToDelete[i]}`);
+    for (let i = 0; i < imageFirebaseUrls.length; i++) {
+      const deleteTask = storage.ref(`/images/${user.uid}/${imageFirebaseUrls[i].fileName}`);
 
       deleteTask.delete().then(() => {
-        console.log('deleted: ', imagesToDelete[i]);
+        console.log('deleted: ', imageFirebaseUrls[i]);
       }).catch((error) => {
         console.log(`Failed to delete file - ${error}`);
       });
@@ -202,6 +221,9 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
           </li>
           <li className="submit-button">
             <button type="submit" className="add-entry-button">Save</button>
+          </li>
+          <li className="submit-button">
+            <a href="#" onClick={() => deleteEntry()}>Delete</a>
           </li>
         </ul>
       </form >
