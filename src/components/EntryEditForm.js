@@ -43,18 +43,18 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
 
   const deleteEntry = async () => {
     imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
+    console.log('imageFirebaseUrls', imageFirebaseUrls);
     setImagesToDelete(imageFirebaseUrls);
     await deleteImagesFromStorage();
     const newEntries = entries.filter((e) => e.id !== entryToEdit.id);
+    setEntries(newEntries);
 
     db.collection(`users/${user.uid}/entries`).doc(entryId).delete().then(() => {
-      console.log('deleted entry: ', entryToEdit);
+      console.log('deleted entry: ', entryId);
     })
       .catch(error => {
-        throw new Error(`Error deleting entry: ${error}`);
+        throw new Error(`Error adding entry: ${error}`);
       });
-    
-    setEntries(newEntries);
   }
 
   const handleFirebaseUploads = async () => {
@@ -76,6 +76,7 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
   }
 
   const deleteImagesFromStorage = async () => {
+    console.log('imagesToDelete in deleteImagesFromStorage: ', imageFirebaseUrls);
     for (let i = 0; i < imageFirebaseUrls.length; i++) {
       const deleteTask = storage.ref(`/images/${user.uid}/${imageFirebaseUrls[i].fileName}`);
 
