@@ -43,12 +43,9 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
 
   const deleteEntry = async () => {
     imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
-    console.log('imageFirebaseUrls', imageFirebaseUrls);
     setImagesToDelete(imageFirebaseUrls);
     await deleteImagesFromStorage();
     const newEntries = entries.filter((e) => e.id !== entryToEdit.id);
-    console.log('entries: ', entries);
-    console.log('newEntries: ', newEntries);
 
     db.collection(`users/${user.uid}/entries`).doc(entryId).delete().then(() => {
       console.log('deleted entry: ', entryToEdit);
