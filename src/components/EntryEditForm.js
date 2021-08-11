@@ -43,14 +43,14 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
 
   const deleteEntry = async () => {
     imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
-    console.log('imageFirebaseUrls', imageFirebaseUrls);
+    // console.log('imageFirebaseUrls', imageFirebaseUrls);
     setImagesToDelete(imageFirebaseUrls);
     await deleteImagesFromStorage();
     const newEntries = entries.filter((e) => e.id !== entryToEdit.id);
     setEntries(newEntries);
 
     db.collection(`users/${user.uid}/entries`).doc(entryId).delete().then(() => {
-      console.log('deleted entry: ', entryId);
+      // console.log('deleted entry: ', entryId);
     })
       .catch(error => {
         throw new Error(`Error adding entry: ${error}`);
@@ -76,12 +76,21 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
   }
 
   const deleteImagesFromStorage = async () => {
-    console.log('imagesToDelete in deleteImagesFromStorage: ', imageFirebaseUrls);
     for (let i = 0; i < imageFirebaseUrls.length; i++) {
       const deleteTask = storage.ref(`/images/${user.uid}/${imageFirebaseUrls[i].fileName}`);
 
       deleteTask.delete().then(() => {
-        console.log('deleted: ', imageFirebaseUrls[i]);
+        // console.log('deleted: ', imageFirebaseUrls[i]);
+      }).catch((error) => {
+        console.log(`Failed to delete file - ${error}`);
+      });
+    }
+
+    for (let i = 0; i < imagesToDelete.length; i++) {
+      const deleteTask = storage.ref(`/images/${user.uid}/${imagesToDelete[i]}`);
+
+      deleteTask.delete().then(() => {
+        // console.log('deleted: ', imagesToDelete[i]);
       }).catch((error) => {
         console.log(`Failed to delete file - ${error}`);
       });
