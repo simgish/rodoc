@@ -8,6 +8,7 @@ import EntryEditForm from './components/EntryEditForm';
 import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserProvider from './providers/UserProvider';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const [categories, setCategories] = useState(['Bedtime', 'Schedule', 'Schoolwork']);
@@ -24,12 +25,11 @@ const App = () => {
             <header>
               <h1>RoDoc</h1>
             </header>
-            {/* <LogInOut /> */}
           </div>
           <div>
+            
+            <Toaster position="bottom-center" />
             <TopNav />
-
-            {/* <hr /> */}
 
             <Switch>
               <Route exact path="/">
@@ -48,7 +48,7 @@ const App = () => {
           </div>
           <div className="loginoutbutton">
             <LogInOut />
-            </div>
+          </div>
         </Router>
       </div>
     </UserProvider>

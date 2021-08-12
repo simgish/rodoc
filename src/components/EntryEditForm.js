@@ -8,6 +8,7 @@ import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import { useParams } from "react-router-dom";
 import firebase from 'firebase/app';
+import toast from 'react-hot-toast';
 
 const EntryEditForm = ({ addNewCategory, categories }) => {
   const user = useContext(UserContext).user;
@@ -43,14 +44,13 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
 
   const deleteEntry = async () => {
     imageFirebaseUrls = imageFirebaseUrls.concat(entryToEdit.images);
-    // console.log('imageFirebaseUrls', imageFirebaseUrls);
     setImagesToDelete(imageFirebaseUrls);
     await deleteImagesFromStorage();
     const newEntries = entries.filter((e) => e.id !== entryToEdit.id);
     setEntries(newEntries);
 
     db.collection(`users/${user.uid}/entries`).doc(entryId).delete().then(() => {
-      // console.log('deleted entry: ', entryId);
+      toast.success('Entry deleted successfully.');
     })
       .catch(error => {
         throw new Error(`Error adding entry: ${error}`);
@@ -76,6 +76,8 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
   }
 
   const deleteImagesFromStorage = async () => {
+    // console.log('imageFirebaseUrls: ', imageFirebaseUrls);
+    // console.log('imagesToDelete: ', imagesToDelete);
     for (let i = 0; i < imageFirebaseUrls.length; i++) {
       const deleteTask = storage.ref(`/images/${user.uid}/${imageFirebaseUrls[i].fileName}`);
 
@@ -121,6 +123,7 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
     }).then((entry) => {
       db.collection(`users/${user.uid}/entries`).doc(entryId).update(entry).then(() => {
         editEntry(entryId, entry);
+        toast.success('Entry updated successfully.');
       })
         .catch(error => {
           throw new Error(`Error adding entry: ${error}`);

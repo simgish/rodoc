@@ -7,6 +7,7 @@ import EmoticonSelector from './EmoticonSelector';
 import db from '../firebase.config';
 import { storage } from '../firebase.config';
 import firebase from 'firebase/app';
+import toast from 'react-hot-toast';
 
 const EntryForm = ({ addNewCategory, categories }) => {
   const user = useContext(UserContext).user;
@@ -61,11 +62,14 @@ const EntryForm = ({ addNewCategory, categories }) => {
         entry.id = firestoreResult.id;
         setEntries(entries.concat(entry));
         resetForm(event);
+        toast.success('Entry added!');
       })
         .catch(error => {
+          toast.error(`Error: ${error}`);
           throw new Error(`Error adding entry: ${error}`);
         });
     });
+    
 
   };
 
