@@ -197,6 +197,7 @@ ul.entry-form input {
 .image-selected-preview {
   max-width: 10em;
   max-height: 10em;
+  cursor: pointer;
 }
 
 .add-category-modal {

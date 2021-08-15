@@ -171,6 +171,10 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
     setEntryToEdit({ ...entryToEdit, emotion: e.target.value });
   }
 
+  const enlargeImage = (e) => {
+    console.log('enlarge image: ', e);
+  }
+
   const renderExistingImages = () => {
     if (!Array.isArray(entryToEdit?.images)) {
       return;
@@ -183,7 +187,7 @@ const EntryEditForm = ({ addNewCategory, categories }) => {
           return (
             <li key={index} className="image-wrapper">
               <span className="image-close-button" onClick={() => removeExistingImage(image.fileName)}><FontAwesomeIcon icon={faTimes} /></span>
-              <img alt="" className="image-selected-preview" src={image.downloadUrl} />
+              <img alt="" className="image-selected-preview" src={image.downloadUrl} onClick={() => enlargeImage(image.fileName)} />
             </li>
           )
         })}
