@@ -1,5 +1,5 @@
-import { useState, useEffect, createContext } from "react";
-import { Redirect } from 'react-router-dom';
+import { createContext, useEffect, useState } from "react";
+
 import { auth } from '../firebase.config';
 import db from '../firebase.config';
 
